@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import { brand } from "@/config/brand";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Poppins } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 const PoppinsFont = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -66,12 +67,13 @@ export default function RootLayout({
       <body
         className={`max-h-screen relative bg-canvas font-sans text-foreground ${PoppinsFont.className}`}
       >
-        <SpeedInsights />
         <ThemeProvider>
           <Header />
           {children}
           <Footer />
         </ThemeProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
