@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { brand } from "@/config/brand";
-import { IconComp } from "@/components/widgets/icon-comp";
+import { IconComp } from "@/components/widgets/IconComp";
 import {
   PAGE_NAVIGATION,
   SERVICE_CATEGORY_TABS,
@@ -12,7 +12,7 @@ import {
   type NavigationIcon,
 } from "@/data/navigation_data";
 import type { ServiceCategory } from "@/data/services_data";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "@/components/shared/Button";
 import Image from "next/image";
 

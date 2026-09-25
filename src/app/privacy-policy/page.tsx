@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { InformationalPageView } from "@/components/pages/informational-page-view";
+import { InformationalPageView } from "@/components/pages/InformationalPageView";
 import { PAGES_DATA } from "@/data/pages_data";
 
 export const metadata: Metadata = {

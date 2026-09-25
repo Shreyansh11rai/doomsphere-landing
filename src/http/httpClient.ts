@@ -1,4 +1,5 @@
 import { env } from "@/env/env";
+import axios, { AxiosError } from "axios";
 import type { ApiResponse } from "@/types/api";
 
 class HttpClientError extends Error {
@@ -8,42 +9,38 @@ class HttpClientError extends Error {
   }
 }
 
+const client = axios.create({
+  baseURL: env.apiBaseUrl,
+  timeout: env.apiTimeoutMs,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+});
+
 async function request<TResponse, TPayload extends object>(
   endpoint: string,
   payload: TPayload,
 ): Promise<ApiResponse<TResponse>> {
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(
-    () => controller.abort(),
-    env.apiTimeoutMs,
-  );
-
   try {
-    const response = await fetch(`${env.apiBaseUrl}${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-    });
-
-    const data = (await response.json()) as ApiResponse<TResponse>;
-    if (!response.ok || data.success === false) {
-      throw new HttpClientError(data.message ?? "Request failed.");
+    const response = await client.post<ApiResponse<TResponse>>(
+      endpoint,
+      payload,
+    );
+    if (response.data.success === false) {
+      throw new HttpClientError(response.data.message ?? "Request failed.");
     }
-
-    return data;
+    return response.data;
   } catch (error) {
-    if (error instanceof DOMException && error.name === "AbortError") {
+    if (error instanceof HttpClientError) throw error;
+    if (error instanceof AxiosError && error.response?.data?.message) {
+      throw new HttpClientError(error.response.data.message);
+    }
+    if (error instanceof AxiosError && error.code === "ECONNABORTED") {
       throw new HttpClientError("Request timed out.");
     }
-    throw error instanceof HttpClientError
-      ? error
-      : new HttpClientError("Unexpected request error.");
-  } finally {
-    window.clearTimeout(timeoutId);
+    throw new HttpClientError("Unexpected request error.");
   }
 }
 

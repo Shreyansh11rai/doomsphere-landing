@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ContactPageView } from "@/components/contact/contact-page-view";
+import { ContactPageView } from "@/components/pages/contact/ContactPageView";
 import { PAGES_DATA } from "@/data/pages_data";
 
 export const metadata: Metadata = {

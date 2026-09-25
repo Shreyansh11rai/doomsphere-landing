@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { brand } from "@/config/brand";
 import { Button } from "@/components/shared/Button";
-import { IconComp } from "@/components/widgets/icon-comp";
+import { IconComp } from "@/components/widgets/IconComp";
 import { SERVICES_DATA, type ServiceData } from "@/data/services_data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { submitPricingInterest } from "@/services/enquiryService";
@@ -26,6 +26,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
       name: String(form.get("name") ?? ""),
       company: String(form.get("company") ?? ""),
       contact: String(form.get("contact") ?? ""),
+      requirement: String(form.get("requirement") ?? ""),
       serviceId: service.slug,
       source: "service-page-quote",
     };
@@ -412,8 +413,8 @@ export function ServicePageView({ service }: ServicePageViewProps) {
       )}
 
       {isPricingOpen && (
-        <div className="fixed inset-0 z-80 flex items-center justify-center bg-slate-950/40 px-4 backdrop-blur-sm">
-          <div className="ui-modal w-full max-w-md rounded-3xl p-6 backdrop-blur-xl">
+        <div className="fixed inset-0 z-80 flex items-center justify-center bg-surface/30 px-4 backdrop-blur-sm">
+          <div className="ui-modal w-full max-w-md rounded-3xl p-6 bg-surface">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-primary">
@@ -451,6 +452,12 @@ export function ServicePageView({ service }: ServicePageViewProps) {
                   Contact
                 </span>
                 <input name="contact" required className="ui-input" />
+              </label>
+              <label className="block text-sm text-muted">
+                <span className="mb-2 block font-semibold text-foreground">
+                  Requirement
+                </span>
+                <input name="requirement" className="ui-input" />
               </label>
               <Button type="submit" size="lg" radius="xl" className="w-full">
                 Get quote

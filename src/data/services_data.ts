@@ -1922,3 +1922,4 @@ export const SERVICES_DATA: readonly ServiceData[] = [
 ];
 
 export const SERVICE_SLUGS = SERVICES_DATA.map(({ slug }) => slug);
+export const SERVICE_NAMES = SERVICES_DATA.map(({ name }) => name);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PricingPageView } from "@/components/pricing/pricing-page-view";
+import { PricingPageView } from "@/components/pages/pricing/PricingPageView";
 
 export const metadata: Metadata = {
   title: "Get a Quote",

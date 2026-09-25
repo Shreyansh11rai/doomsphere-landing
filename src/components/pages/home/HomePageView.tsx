@@ -6,7 +6,7 @@ import { HOME_PAGE_DATA } from "@/data/home_page_data";
 import { SERVICES_DATA } from "@/data/services_data";
 import { HOME_TESTIMONIALS } from "@/data/testimonials_data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { IconComp } from "@/components/widgets/icon-comp";
+import { IconComp } from "@/components/widgets/IconComp";
 import { Button } from "@/components/shared/Button";
 import { BiArrowBack } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
