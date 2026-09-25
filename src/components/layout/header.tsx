@@ -230,7 +230,7 @@ function ServicesDirectory({
           </Button>
         </div>
         <div
-          className="mt-5 flex gap-2 overflow-x-auto pb-1"
+          className="mt-5 flex gap-2 overflow-x-auto py-2"
           role="tablist"
           aria-label="Service categories"
         >
@@ -249,7 +249,7 @@ function ServicesDirectory({
             </Button>
           ))}
         </div>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 overflow-y-auto max-h-[55vh]">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 overflow-y-auto max-h-[55vh]">
           {services.map((service) => (
             <Link
               key={service.slug}
