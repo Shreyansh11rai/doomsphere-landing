@@ -7,12 +7,7 @@ export interface NavigationItem {
   icon: NavigationIcon;
 }
 
-export type NavigationIcon =
-  | "about"
-  | "contact"
-  | "faq"
-  | "home"
-  | "service";
+export type NavigationIcon = "about" | "contact" | "faq" | "home" | "service";
 
 export const PAGE_NAVIGATION: readonly NavigationItem[] = [
   {
@@ -50,6 +45,7 @@ export const SERVICE_CATEGORY_TABS: readonly (
   "WhatsApp Services",
   "Websites",
   "Automations",
+  "Marketing & Growth",
 ];
 
 export function getServicesForCategory(

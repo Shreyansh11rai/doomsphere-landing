@@ -308,7 +308,9 @@ export function HomePageView() {
                         ? "message"
                         : service.category === "Websites"
                           ? "window"
-                          : "spark"
+                          : service.category === "Marketing & Growth"
+                            ? "target"
+                            : "spark"
                   }
                   className="h-5 w-5"
                 />

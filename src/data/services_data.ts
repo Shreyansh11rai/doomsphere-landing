@@ -68,6 +68,7 @@ export const SERVICE_CATEGORIES = [
   "WhatsApp Services",
   "Websites",
   "Automations",
+  "Marketing & Growth",
 ] as const;
 
 export type ServiceCategory = (typeof SERVICE_CATEGORIES)[number];
@@ -129,7 +130,559 @@ const createService = (
   ],
 });
 
+const MARKETING_SERVICES: readonly ServiceData[] = [
+  createService(
+    "seo-services",
+    "SEO services",
+    "Marketing & Growth",
+    "search",
+    "Help the right customers find your business online.",
+    "Organic growth",
+    "Make your website easier to find and trust.",
+    "People-first SEO built around search intent, useful pages, and steady improvement.",
+    18000,
+    "Built for long-term visibility",
+    [
+      "Search opportunity research",
+      "On-page SEO improvements",
+      "Search performance reporting",
+    ],
+    ["Clearer search-to-enquiry journey", "Evidence-led SEO decisions"],
+    [
+      {
+        title: "Save time",
+        detail:
+          "Prioritise the pages and search topics most relevant to customers.",
+      },
+      {
+        title: "Save money",
+        detail:
+          "Build durable organic visibility instead of relying only on paid traffic.",
+      },
+    ],
+    [
+      "Your website does not appear clearly for customer searches.",
+      "Page structure and copy do not explain the offer clearly.",
+    ],
+    ["Businesses wanting a stronger search presence over time"],
+    "Improve our SEO",
+    {
+      valueProposition:
+        "Turn real customer questions into clear, useful pages that search engines and people can understand.",
+      problems: [
+        {
+          title: "Hard to discover",
+          description:
+            "Your best service is not connected to the phrases customers use.",
+        },
+        {
+          title: "Thin page signals",
+          description:
+            "Titles, headings, and links do not make the offer easy to understand.",
+        },
+        {
+          title: "No feedback loop",
+          description:
+            "You cannot tell which pages deserve the next improvement.",
+        },
+      ],
+      process: [
+        {
+          title: "Research",
+          description:
+            "Study your audience, search intent, existing pages, and realistic opportunities.",
+        },
+        {
+          title: "Improve",
+          description:
+            "Refine structure, copy, links, metadata, and technical priorities without keyword stuffing.",
+        },
+        {
+          title: "Learn",
+          description:
+            "Review search and business signals, then prioritise the next iteration.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Useful before optimised",
+          description:
+            "Recommendations start with what customers need to understand and do.",
+        },
+        {
+          title: "No ranking promises",
+          description:
+            "We build a responsible process for learning and improving.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Can you guarantee a first-page ranking?",
+          answer:
+            "No. Search results change, but we can improve relevance, quality, and discoverability through a clear process.",
+        },
+        {
+          question: "Do you use keyword stuffing?",
+          answer:
+            "No. We use natural language, useful structure, and the words your audience uses.",
+        },
+      ],
+    },
+  ),
+  createService(
+    "content-marketing",
+    "Content marketing",
+    "Marketing & Growth",
+    "book",
+    "Create helpful content that supports discovery and decisions.",
+    "Useful content",
+    "Give your audience better reasons to choose you.",
+    "Research-led articles, guides, and campaign content written for real people and a clear business goal.",
+    14000,
+    "Clearer customer education",
+    [
+      "Content topic planning",
+      "People-first article writing",
+      "Content distribution guidance",
+    ],
+    [
+      "Stronger answers to customer questions",
+      "Content that supports discovery and decisions",
+    ],
+    [
+      {
+        title: "Save time",
+        detail: "Turn recurring customer questions into useful resources.",
+      },
+      {
+        title: "Save money",
+        detail:
+          "Build a reusable library instead of restarting every sales conversation.",
+      },
+    ],
+    [
+      "Your audience needs more information before buying.",
+      "Content is published without a clear audience or next step.",
+    ],
+    ["Businesses with expertise they want to explain simply"],
+    "Plan our content",
+    {
+      valueProposition:
+        "Publish original, easy-to-understand content that answers real questions and leads to a useful next step.",
+      problems: [
+        {
+          title: "Topics without direction",
+          description:
+            "The calendar follows trends instead of customer questions.",
+        },
+        {
+          title: "Hard-to-read explanations",
+          description:
+            "Internal language makes useful expertise difficult to act on.",
+        },
+      ],
+      process: [
+        {
+          title: "Listen",
+          description:
+            "Review customer questions, expertise, search intent, and goals.",
+        },
+        {
+          title: "Write",
+          description:
+            "Create original content with clear headings, examples, sources, and a natural voice.",
+        },
+        {
+          title: "Improve",
+          description: "Refine content using reader and business signals.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Original thinking",
+          description:
+            "We add your experience instead of rewriting other pages.",
+        },
+        {
+          title: "Readable structure",
+          description:
+            "Short sections and direct language help readers find the answer.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Is this AI-generated content?",
+          answer:
+            "Tools may support research or drafting, but the final work is checked, shaped by your expertise, and made original.",
+        },
+        {
+          question: "Do you research topics first?",
+          answer:
+            "Yes. We combine audience questions, business context, and search intent.",
+        },
+      ],
+    },
+  ),
+  createService(
+    "performance-advertising",
+    "Performance advertising",
+    "Marketing & Growth",
+    "target",
+    "Turn paid reach into measurable visits and leads.",
+    "Paid growth",
+    "Make every campaign easier to understand and improve.",
+    "Performance campaigns with clear goals, relevant creative, focused landing pages, and useful reporting.",
+    22000,
+    "Measured from click to outcome",
+    [
+      "Campaign and audience planning",
+      "Ad copy and creative direction",
+      "Conversion tracking and optimisation",
+    ],
+    [
+      "Clear connection between spend and action",
+      "Campaigns improved through testing",
+    ],
+    [
+      {
+        title: "Save time",
+        detail: "Keep goals, audiences, messages, and landing pages aligned.",
+      },
+      {
+        title: "Save money",
+        detail: "Use performance signals to reduce wasted spend.",
+      },
+    ],
+    [
+      "Paid traffic arrives but the landing page does not match the ad.",
+      "Campaign decisions rely on clicks instead of meaningful conversions.",
+    ],
+    ["Businesses testing a focused offer with a defined goal"],
+    "Plan our campaign",
+    {
+      valueProposition:
+        "Build paid campaigns around a clear customer action, then use real data to make the next decision.",
+      problems: [
+        {
+          title: "Clicks without progress",
+          description: "Visitors cannot quickly see why the offer is relevant.",
+        },
+        {
+          title: "Message mismatch",
+          description:
+            "Ad copy, creative, and landing page make different promises.",
+        },
+      ],
+      process: [
+        {
+          title: "Define",
+          description:
+            "Set audience, offer, conversion event, budget, and success measures.",
+        },
+        {
+          title: "Launch",
+          description: "Connect each message to a matching landing experience.",
+        },
+        {
+          title: "Optimise",
+          description:
+            "Review signals, test changes, and document the next action.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Outcome-aware",
+          description:
+            "We look beyond impressions and clicks to business value.",
+        },
+        {
+          title: "Honest reporting",
+          description: "You see what the data says and what it cannot say.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Do you guarantee a return on ad spend?",
+          answer:
+            "No. Results depend on the offer, market, budget, audience, creative, and landing experience.",
+        },
+        {
+          question: "Is the ad budget included?",
+          answer: "No. Media spend is paid to the platform separately.",
+        },
+      ],
+    },
+  ),
+  createService(
+    "graphic-design",
+    "Graphic design",
+    "Marketing & Growth",
+    "palette",
+    "Create clear visual assets that make your brand recognisable.",
+    "Visual communication",
+    "Give every important message a sharper visual shape.",
+    "Purposeful graphics for campaigns, social media, presentations, and digital touchpoints.",
+    9000,
+    "Designed for real use",
+    [
+      "Campaign and social graphics",
+      "Brand-consistent layouts",
+      "Export-ready asset set",
+    ],
+    ["More consistent visual presence", "Assets ready for their channels"],
+    [
+      {
+        title: "Save time",
+        detail:
+          "Start from a clear visual system instead of recreating every asset.",
+      },
+      {
+        title: "Save money",
+        detail: "Reuse organised assets across campaigns and channels.",
+      },
+    ],
+    [
+      "Your visual execution feels inconsistent.",
+      "Teams need multiple sizes without losing brand clarity.",
+    ],
+    ["Businesses needing reliable digital marketing creative"],
+    "Improve our creative",
+    {
+      valueProposition:
+        "Turn business messages into clear, useful visual assets that work wherever customers see you.",
+      problems: [
+        {
+          title: "Inconsistent look",
+          description: "Different assets make the brand harder to recognise.",
+        },
+        {
+          title: "Crowded communication",
+          description: "Weak hierarchy makes the message difficult to scan.",
+        },
+      ],
+      process: [
+        {
+          title: "Brief",
+          description:
+            "Clarify audience, message, channel, format, and action.",
+        },
+        {
+          title: "Design",
+          description:
+            "Create focused concepts with readable type and strong hierarchy.",
+        },
+        {
+          title: "Deliver",
+          description: "Provide organised, ready-to-use files.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Message first",
+          description: "Design helps people understand the point.",
+        },
+        {
+          title: "Channel-aware",
+          description: "Assets are planned for their actual context.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Can you work with our existing brand?",
+          answer:
+            "Yes. We work within your current colours, type, logo, and visual rules.",
+        },
+        {
+          question: "Can you design for social media?",
+          answer:
+            "Yes. We create channel-aware post, story, reel cover, and campaign variations.",
+        },
+      ],
+    },
+  ),
+  createService(
+    "social-media-marketing",
+    "Social media marketing",
+    "Marketing & Growth",
+    "chat",
+    "Build a useful, recognisable social presence.",
+    "Audience growth",
+    "Show up consistently with something worth engaging with.",
+    "A practical social plan covering content themes, publishing rhythm, community signals, and performance learning.",
+    16000,
+    "Consistent, useful publishing",
+    [
+      "Channel and audience strategy",
+      "Content calendar and post direction",
+      "Monthly performance review",
+    ],
+    ["Consistent brand voice", "Content connected to customer questions"],
+    [
+      {
+        title: "Save time",
+        detail: "Replace last-minute posting with a focused calendar.",
+      },
+      {
+        title: "Save money",
+        detail: "Learn which messages deserve more production effort.",
+      },
+    ],
+    [
+      "Your channels lack a clear purpose or rhythm.",
+      "Posts receive attention without a useful next step.",
+    ],
+    ["Brands wanting a more deliberate social presence"],
+    "Plan our social media",
+    {
+      valueProposition:
+        "Create social content that sounds like your brand, helps your audience, and gives every post a reason to exist.",
+      problems: [
+        {
+          title: "Posting without a plan",
+          description:
+            "Last-minute content misses important messages and questions.",
+        },
+        {
+          title: "Weak brand memory",
+          description:
+            "Inconsistent tone and visuals make the business harder to recognise.",
+        },
+      ],
+      process: [
+        {
+          title: "Position",
+          description:
+            "Define audience, channel role, themes, tone, and outcomes.",
+        },
+        {
+          title: "Plan",
+          description:
+            "Build a realistic calendar with useful formats and clear messages.",
+        },
+        {
+          title: "Learn",
+          description:
+            "Review response and business signals, then improve the next cycle.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Useful consistency",
+          description: "A steady rhythm is built around quality and capacity.",
+        },
+        {
+          title: "Human voice",
+          description: "Content sounds clear and credible rather than generic.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Which platforms should we use?",
+          answer:
+            "We recommend channels based on audience, offer, content strengths, and the conversation you want.",
+        },
+        {
+          question: "How do you measure social media?",
+          answer:
+            "We review meaningful actions alongside reach and engagement, such as enquiries and saves.",
+        },
+      ],
+    },
+  ),
+  createService(
+    "influencer-marketing",
+    "Influencer marketing",
+    "Marketing & Growth",
+    "about",
+    "Partner with relevant creators to introduce your offer.",
+    "Creator partnerships",
+    "Find the right voice for the audience you want to reach.",
+    "Creator campaign planning, briefing, coordination, and measurement built around relevance and transparent sponsored content.",
+    20000,
+    "Built around audience fit",
+    [
+      "Creator and audience research",
+      "Brief and campaign coordination",
+      "Disclosure and performance review",
+    ],
+    ["Relevant introductions", "Clear expectations and honest measurement"],
+    [
+      {
+        title: "Save time",
+        detail: "Shortlist creators by audience fit and content quality.",
+      },
+      {
+        title: "Save money",
+        detail: "Agree deliverables before committing budget or product.",
+      },
+    ],
+    [
+      "You do not know which partnerships fit your customers.",
+      "Collaborations lack a brief, disclosure process, or learning loop.",
+    ],
+    ["Brands launching products or reaching a niche audience"],
+    "Plan a creator campaign",
+    {
+      valueProposition:
+        "Plan creator partnerships that feel relevant to the audience, clear to the creator, and accountable to the brand.",
+      problems: [
+        {
+          title: "Reach without relevance",
+          description:
+            "A large audience does not help when it does not match the offer.",
+        },
+        {
+          title: "Trust risk",
+          description:
+            "Unclear sponsorship can confuse audiences and weaken credibility.",
+        },
+      ],
+      process: [
+        {
+          title: "Match",
+          description:
+            "Shortlist creators by relevance, content quality, and audience fit.",
+        },
+        {
+          title: "Brief",
+          description:
+            "Agree message, deliverables, approvals, rights, and disclosure.",
+        },
+        {
+          title: "Learn",
+          description: "Review content and improve the next partnership.",
+        },
+      ],
+      differentiators: [
+        {
+          title: "Fit over follower count",
+          description:
+            "Audience relevance matters more than a large number alone.",
+        },
+        {
+          title: "Transparent by design",
+          description:
+            "Sponsored relationships are clear and easy to understand.",
+        },
+      ],
+      faqs: [
+        {
+          question: "Do you guarantee influencer sales?",
+          answer:
+            "No. Results depend on fit, offer, content, timing, and other factors.",
+        },
+        {
+          question: "Will sponsored content be disclosed?",
+          answer:
+            "Yes. Paid or gifted endorsements should use clear, hard-to-miss disclosure in the endorsement itself, subject to local rules.",
+        },
+      ],
+    },
+  ),
+];
+
 export const SERVICES_DATA: readonly ServiceData[] = [
+  ...MARKETING_SERVICES,
   createService(
     "booking-solutions",
     "Booking solutions",
