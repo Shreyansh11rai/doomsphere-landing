@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { brand } from "@/config/brand";
-import { IconComp } from "@/components/widgets/IconComp";
+import { brand } from "@/config/brand.config";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import {
   PAGE_NAVIGATION,
   SERVICE_CATEGORY_TABS,

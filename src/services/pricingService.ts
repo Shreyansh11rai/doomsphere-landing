@@ -1,6 +1,4 @@
-import { env } from "@/env/env";
-import { createMockResponse } from "@/data/mock-api";
-import { httpClient } from "@/http/httpClient";
+import { httpClient } from "@/lib/httpClient";
 import type {
   ApiResponse,
   PricingInterestPayload,
@@ -11,10 +9,6 @@ import type {
 export async function createPricingRequest(
   payload: PricingInterestPayload,
 ): Promise<ApiResponse<SubmissionResponse>> {
-  if (env.mockMode) {
-    return createMockResponse(`pricing-${payload.serviceId}`);
-  }
-
   const envelope: RequestEnvelope<PricingInterestPayload> = {
     source: "pricing-card",
     timestamp: new Date().toISOString(),

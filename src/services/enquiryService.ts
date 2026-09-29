@@ -1,4 +1,4 @@
-import { httpClient } from "@/http/httpClient";
+import { httpClient } from "@/lib/httpClient";
 import type {
   ApiResponse,
   BookingFormPayload,

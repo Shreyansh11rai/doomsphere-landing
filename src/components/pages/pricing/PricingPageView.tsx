@@ -1,6 +1,6 @@
 "use client";
 
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { Button } from "@/components/shared/Button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { submitPricingInterest } from "@/services/enquiryService";

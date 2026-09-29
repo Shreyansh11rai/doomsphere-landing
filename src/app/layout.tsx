@@ -3,7 +3,7 @@ import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -68,13 +68,13 @@ export default function RootLayout({
       <body
         className={`max-h-screen relative bg-canvas font-sans text-foreground ${PoppinsFont.className}`}
       >
-        <ThemeProvider>
-          <QueryProvider>
-            <Header />
-            {children}
-            <Footer />
-          </QueryProvider>
-        </ThemeProvider>
+        {/* <ThemeProvider> */}
+        <QueryProvider>
+          <Header />
+          {children}
+          <Footer />
+        </QueryProvider>
+        {/* </ThemeProvider> */}
         <SpeedInsights />
         <Analytics />
       </body>

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/shared/Button";
 import { SERVICES_DATA } from "@/data/services_data";
 import { submitEnquiry } from "@/services/enquiryService";
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { IoCall } from "react-icons/io5";
 
 const MESSAGE_TEMPLATES = {

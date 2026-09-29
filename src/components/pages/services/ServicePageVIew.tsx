@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { Button } from "@/components/shared/Button";
-import { IconComp } from "@/components/widgets/IconComp";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import { SERVICES_DATA, type ServiceData } from "@/data/services_data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { submitPricingInterest } from "@/services/enquiryService";

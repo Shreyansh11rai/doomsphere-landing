@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IconComp } from "@/components/widgets/IconComp";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CallRequestForm } from "@/components/pages/contact/CallRequestForm";
 import { EnquiryForm } from "@/components/pages/contact/EnquiryForm";

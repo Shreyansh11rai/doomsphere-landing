@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { Button } from "@/components/shared/Button";
-import { IconComp } from "@/components/widgets/IconComp";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import type { InformationalPageData } from "@/data/pages_data";
 
 interface InformationalPageViewProps {

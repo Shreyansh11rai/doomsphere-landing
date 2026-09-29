@@ -1,6 +1,6 @@
-import { env } from "@/env/env";
 import axios, { AxiosError } from "axios";
 import type { ApiResponse } from "@/types/api";
+import { Env } from "@/config/env.config";
 
 class HttpClientError extends Error {
   constructor(message: string) {
@@ -10,8 +10,8 @@ class HttpClientError extends Error {
 }
 
 const client = axios.create({
-  baseURL: env.apiBaseUrl,
-  timeout: env.apiTimeoutMs,
+  baseURL: Env.apiBaseUrl,
+  timeout: Env.apiTimeoutMs,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

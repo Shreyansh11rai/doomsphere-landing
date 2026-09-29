@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { httpClient } from "@/http/httpClient";
+import { httpClient } from "@/lib/httpClient";
 import type { ApiResponse, SubmissionResponse } from "@/types/api";
 import { SERVICE_NAMES } from "@/data/services_data";
 
