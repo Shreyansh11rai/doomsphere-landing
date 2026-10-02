@@ -5,9 +5,17 @@ import { IconComp } from "@/components/layout/widgets/IconComp";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CallRequestForm } from "@/components/pages/contact/CallRequestForm";
 import { EnquiryForm } from "@/components/pages/contact/EnquiryForm";
+import { useEnquiry } from "@/hooks/useEnquiryMutation";
 
 export function ContactPageView() {
   useScrollReveal();
+
+  const { enquiryMutation, servicesQuery, callRequestMutation } = useEnquiry();
+
+  const { data, isLoading, isError, error } = servicesQuery;
+
+  const services = data;
+
   const [activeForm, setActiveForm] = useState<"enquiry" | "call">("enquiry");
 
   return (
@@ -65,12 +73,26 @@ export function ContactPageView() {
           className="relative overflow-hidden rounded-3xl border border-border bg-surface p-6 backdrop-blur-xl"
           data-reveal
         >
-          <div className="absolute -left-10 -top-10 h-28 w-28 rounded-full bg-primary/10 blur-3xl" />
+          {/* <div className="absolute -left-10 -top-10 h-28 w-28 rounded-full bg-primary/40 blur-3xl" /> */}
           <p className="relative mb-6 text-sm font-bold tracking-[.18em] text-primary uppercase">
             {activeForm === "enquiry" ? "Project enquiry" : "Call request"}
           </p>
           <div className="relative">
-            {activeForm === "enquiry" ? <EnquiryForm /> : <CallRequestForm />}
+            {activeForm === "enquiry" ? (
+              <EnquiryForm
+                enquiryMutation={enquiryMutation}
+                isError={isError}
+                isLoading={isLoading}
+                services={services}
+              />
+            ) : (
+              <CallRequestForm
+                callRequestMutation={callRequestMutation}
+                isError={isError}
+                isLoading={isLoading}
+                services={services}
+              />
+            )}
           </div>
         </div>
       </section>

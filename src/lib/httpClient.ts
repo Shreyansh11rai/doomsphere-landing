@@ -1,52 +1,53 @@
-import axios, { AxiosError } from "axios";
-import type { ApiResponse } from "@/types/api";
 import { Env } from "@/config/env.config";
+import axios, { AxiosError, type AxiosResponse } from "axios";
+import { toast } from "sonner";
 
-class HttpClientError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "HttpClientError";
-  }
-}
+type ApiResponse<T> = {
+  success: boolean;
+  message?: string;
+  data?: T;
+  code?: string;
+  fields?: Record<string, string[]>;
+};
 
-const client = axios.create({
+export const api = axios.create({
   baseURL: Env.apiBaseUrl,
-  timeout: Env.apiTimeoutMs,
   withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
+  headers: { "Content-Type": "application/json" },
 });
 
-async function request<TResponse, TPayload extends object>(
-  endpoint: string,
-  payload: TPayload,
-): Promise<ApiResponse<TResponse>> {
-  try {
-    const response = await client.post<ApiResponse<TResponse>>(
-      endpoint,
-      payload,
-    );
-    if (response.data.success === false) {
-      throw new HttpClientError(response.data.message ?? "Request failed.");
+api.interceptors.response.use(
+  (response: AxiosResponse<ApiResponse<unknown>>) => {
+    if (!response.data.success) {
+      return Promise.reject(
+        new AxiosError(
+          response.data.message ?? "Request failed",
+          undefined,
+          response.config,
+          response.request,
+          response,
+        ),
+      );
     }
-    return response.data;
-  } catch (error) {
-    if (error instanceof HttpClientError) throw error;
-    if (error instanceof AxiosError && error.response?.data?.message) {
-      throw new HttpClientError(error.response.data.message);
+    return response.data.data as never;
+  },
+  (error: unknown) => {
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status;
+      if (status && status >= 500) {
+        toast("Something went wrong on our side");
+      }
     }
-    if (error instanceof AxiosError && error.code === "ECONNABORTED") {
-      throw new HttpClientError("Request timed out.");
-    }
-    throw new HttpClientError("Unexpected request error.");
-  }
-}
 
-export const httpClient = {
-  post: <TResponse, TPayload extends object>(
-    endpoint: string,
-    payload: TPayload,
-  ) => request<TResponse, TPayload>(endpoint, payload),
-};
+    return Promise.reject(error);
+  },
+);
+
+api.interceptors.request.use(
+  (req) => {
+    return req;
+  },
+  (req) => {
+    return req;
+  },
+);

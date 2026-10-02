@@ -1,9 +1,20 @@
 import { z } from "zod";
-import { httpClient } from "@/lib/httpClient";
-import type { ApiResponse, SubmissionResponse } from "@/types/api";
-import { SERVICE_NAMES } from "@/data/services_data";
+import { api } from "@/lib/httpClient";
+import type {
+  ApiResponse,
+  ServicesResponse,
+  SubmissionResponse,
+} from "@/types/api";
+import { requestData } from "@/utils/api.utils";
+import { phoneValidator } from "@/utils/validator.utils";
 
-const optionalText = z.string().trim().max(200).optional().or(z.literal(""));
+const optionalText = z
+  .string()
+  .trim()
+  .min(2)
+  .max(200)
+  .optional()
+  .or(z.literal(""));
 
 export const enquirySchema = z.object({
   name: z
@@ -11,15 +22,10 @@ export const enquirySchema = z.object({
     .trim()
     .min(2, "Enter your name.")
     .max(100, "Too long name, please keep it short."),
-  email: z.email("Enter a valid email address."),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^[+\d][\d\s().-]{7,18}$/, "Enter a valid phone number."),
   companyName: optionalText,
-  service: z.enum(SERVICE_NAMES, {
-    message: "Choose a service.",
-  }),
+  email: z.email("Enter a valid email address.").optional().or(z.literal("")),
+  phone: phoneValidator,
+  services: z.array(z.number()).min(1, "Select at least one service."),
   budgetRange: z.enum(
     [
       "Under ₹25,000",
@@ -46,41 +52,71 @@ export const enquirySchema = z.object({
 
 export const callRequestSchema = z.object({
   name: z.string().trim().min(2, "Enter your name."),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^[+\d][\d\s().-]{7,18}$/, "Enter a valid phone number."),
-  preferredSlot: z.enum(["Morning", "Afternoon", "Evening"], {
+  phone: phoneValidator,
+  services: z.array(z.number()).min(1, "Select at least one service."),
+  slot: z.enum(["Morning", "Afternoon", "Evening"], {
     message: "Choose a preferred slot.",
   }),
-  reason: z
-    .enum(["New project", "Support", "Pricing", "Not mentioned"])
-    .optional()
-    .or(z.literal("")),
+  reason: z.enum(["New project", "Support", "Pricing", "Not mentioned"]),
 });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;
 export type CallRequestInput = z.infer<typeof callRequestSchema>;
 
-type EnquiryPayload = EnquiryInput & { type: "enquiry" };
-type CallRequestPayload = CallRequestInput & { type: "call_request" };
+type InquiryBackendPayload = {
+  name: string;
+  companyName: string | null;
+  services: number[];
+  message: string;
+  budgetRange: string;
+  timeline: string;
+  email: string | null;
+  phone: string;
+  type: "inquiry";
+  source: string | null;
+};
+
+function toInquiryBackendPayload(data: EnquiryInput): InquiryBackendPayload {
+  return {
+    name: data.name.trim(),
+    companyName: data.companyName?.trim() || null,
+    services: data.services,
+    budgetRange: data.budgetRange,
+    timeline: data.timeline,
+    email: data.email || null,
+    phone: data.phone,
+    message: data.message,
+    type: "inquiry",
+    source: data.source || null,
+  };
+}
 
 export function postEnquiry(
   data: EnquiryInput,
 ): Promise<ApiResponse<SubmissionResponse>> {
-  const payload: EnquiryPayload = { ...data, type: "enquiry" };
-  return httpClient.post<SubmissionResponse, EnquiryPayload>(
-    "/api/enquiries",
-    payload,
+  return requestData(
+    api.post<SubmissionResponse, InquiryBackendPayload>(
+      "/enquiries",
+      toInquiryBackendPayload(data),
+    ),
   );
+}
+
+export function getServiceOptions(): Promise<ServicesResponse[]> {
+  return requestData(api.get<ServicesResponse[]>("/enquiries/services"));
 }
 
 export function postCallRequest(
   data: CallRequestInput,
 ): Promise<ApiResponse<SubmissionResponse>> {
-  const payload: CallRequestPayload = { ...data, type: "call_request" };
-  return httpClient.post<SubmissionResponse, CallRequestPayload>(
-    "/api/enquiries",
-    payload,
+  return requestData(
+    api.post<SubmissionResponse, Record<string, unknown>>("/enquiries", {
+      name: data.name.trim(),
+      services: data.services,
+      phone: data.phone,
+      type: "callback",
+      reason: data.reason,
+      slot: data.slot,
+    }),
   );
 }

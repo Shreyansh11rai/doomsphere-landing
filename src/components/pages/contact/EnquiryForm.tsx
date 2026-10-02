@@ -1,24 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { enquirySchema, type EnquiryInput } from "@/api/enquiry.api";
+import FieldError from "@/components/inputs/FiledError";
+import MultiSelect from "@/components/inputs/MultiSelect";
 import { Button } from "@/components/shared/Button";
-import { useEnquiryMutation } from "@/hooks/useEnquiryMutation";
-import { SERVICE_NAMES } from "@/data/services_data";
+import type { ServicesResponse } from "@/types/api";
+import { logger } from "@/utils/logger";
+import type { UseMutationResult } from "@tanstack/react-query";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const initialValues: EnquiryInput = {
   name: "",
   email: "",
   phone: "",
   companyName: "",
-  service: undefined as never,
+  services: [],
   budgetRange: undefined as never,
   timeline: undefined as never,
   message: "",
   source: "",
 };
-
-const services = SERVICE_NAMES.map((n) => n);
 
 const budgetRanges = [
   "Under ₹25,000",
@@ -38,20 +40,21 @@ const sources = ["Google search", "Social media", "Referral", "Other"] as const;
 
 type FieldErrors = Partial<Record<keyof EnquiryInput, string>>;
 
-function FieldError({ message }: { message?: string }) {
-  return message ? (
-    <span className="mt-1 block text-xs font-medium text-red-600">
-      {message}
-    </span>
-  ) : null;
-}
-
-export function EnquiryForm() {
+export function EnquiryForm({
+  enquiryMutation,
+  isError,
+  isLoading,
+  services,
+}: {
+  enquiryMutation: UseMutationResult<unknown, Error, EnquiryInput>;
+  isError: boolean;
+  isLoading: boolean;
+  services: ServicesResponse[] | undefined;
+}) {
   const [values, setValues] = useState<EnquiryInput>(initialValues);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const { enquiryMutation } = useEnquiryMutation();
 
-  function updateField(field: keyof EnquiryInput, value: string) {
+  function updateField(field: keyof EnquiryInput, value: string | number[]) {
     setValues((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
   }
@@ -69,14 +72,27 @@ export function EnquiryForm() {
       onSuccess: () => {
         setValues(initialValues);
         setErrors({});
+        logger.trace("posted");
+        toast.success("Thanks, we’ll get back to you soon.");
+      },
+      onError: (err) => {
+        logger.trace("didnt posted");
+        logger.trace(err);
+        toast.error(
+          enquiryMutation.error?.message ??
+            "We could not send your enquiry. Please try again.",
+        );
       },
     });
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    logger.trace("at submit");
     const result = enquirySchema.safeParse(values);
     if (!result.success) {
+      logger.trace("at wrong validation");
+      logger.trace({ e: result.error });
       const nextErrors: FieldErrors = {};
       result.error.issues.forEach((issue) => {
         const field = issue.path[0] as keyof EnquiryInput;
@@ -85,6 +101,7 @@ export function EnquiryForm() {
       setErrors(nextErrors);
       return;
     }
+    logger.trace("at post");
     submit(result.data);
   }
 
@@ -143,28 +160,19 @@ export function EnquiryForm() {
             className="ui-input"
           />
           <FieldError message={errors.companyName} />
-        </label>
+        </label>{" "}
+        <MultiSelect<number>
+          placeholder="Select service"
+          value={values.services}
+          label="Service"
+          isError={isError}
+          isLoading={isLoading}
+          optionsArray={services}
+          onChange={(dt) => updateField("services", dt)}
+        />
       </div>
 
-      <label className="block text-sm text-muted">
-        <span className="mb-2 block font-semibold text-foreground">
-          Service
-        </span>
-        <select
-          value={values.service ?? ""}
-          onChange={(event) => updateField("service", event.target.value)}
-          className="ui-input"
-          required
-        >
-          <option value="">Choose a service</option>
-          {services.map((type) => (
-            <option key={type}>{type}</option>
-          ))}
-        </select>
-        <FieldError message={errors.service} />
-      </label>
-
-      {values.service && (
+      {values.services.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="text-sm text-muted">
             <span className="mb-2 block font-semibold text-foreground">

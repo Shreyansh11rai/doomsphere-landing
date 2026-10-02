@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { QueryProvider } from "@/components/layout/QueryProvider";
+import { Toaster } from "sonner";
 
 const PoppinsFont = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -68,6 +69,7 @@ export default function RootLayout({
       <body
         className={`max-h-screen relative bg-canvas font-sans text-foreground ${PoppinsFont.className}`}
       >
+        <Toaster position="top-center" />
         {/* <ThemeProvider> */}
         <QueryProvider>
           <Header />
