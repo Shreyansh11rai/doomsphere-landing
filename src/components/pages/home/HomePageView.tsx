@@ -6,11 +6,16 @@ import { HOME_PAGE_DATA } from "@/data/home_page_data";
 import { SERVICES_DATA } from "@/data/services_data";
 import { HOME_TESTIMONIALS } from "@/data/testimonials_data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { IconComp } from "@/components/widgets/icon-comp";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import { Button } from "@/components/shared/Button";
+import { BiArrowBack } from "react-icons/bi";
+import { BsArrowRight } from "react-icons/bs";
+import { useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 /** Static marketing homepage assembled from the service catalogue. */
 export function HomePageView() {
+  const [expand, setExpand] = useState<boolean>(false);
   useScrollReveal();
   const { hero, proofCards, coreBusiness, serviceOverview, valueCards, cta } =
     HOME_PAGE_DATA;
@@ -291,44 +296,56 @@ export function HomePageView() {
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
           {serviceOverview.title}
         </h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {SERVICES_DATA.map((service) => (
-            <Link
-              href={`/${service.slug}`}
-              key={service.slug}
-              className="group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl transition duration-200 group-hover:scale-110" />
-              <span className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <IconComp
-                  name={
-                    service.category === "Enquiry"
-                      ? "calendar"
-                      : service.category === "WhatsApp Services"
-                        ? "message"
-                        : service.category === "Websites"
-                          ? "window"
-                          : "spark"
-                  }
-                  className="h-5 w-5"
-                />
-              </span>
-              <p className="relative mt-4 text-sm font-semibold text-primary">
-                {service.eyebrow}
-              </p>
-              <h3 className="relative mt-3 text-xl font-semibold text-foreground">
-                {service.name}
-              </h3>
-              <p className="relative mt-2 text-sm leading-6 text-muted">
-                {service.summary}
-              </p>
-              {/* TODO: Remove this and add a arrow to represent new page */}
-              <p className="relative mt-5 text-sm font-semibold text-foreground group-hover:text-primary">
-                Explore service <span aria-hidden="true">→</span>
-              </p>
-            </Link>
-          ))}
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {SERVICES_DATA.map((service, i) => {
+            if (i > 5 && !expand) return null;
+            return (
+              <Link
+                href={`/${service.slug}`}
+                key={service.slug}
+                className="group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl transition duration-200 group-hover:scale-110" />
+                <span className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <IconComp
+                    name={
+                      service.category === "Enquiry"
+                        ? "calendar"
+                        : service.category === "WhatsApp Services"
+                          ? "message"
+                          : service.category === "Websites"
+                            ? "window"
+                            : service.category === "Marketing & Growth"
+                              ? "target"
+                              : "spark"
+                    }
+                    className="h-5 w-5"
+                  />
+                </span>
+                <p className="relative mt-4 text-sm font-semibold text-primary">
+                  {service.eyebrow}
+                </p>
+                <h3 className="relative mt-3 text-xl font-semibold text-foreground">
+                  {service.name}
+                </h3>
+                <p className="relative mt-2 text-sm leading-6 text-muted">
+                  {service.summary}
+                </p>
+                {/* TODO: Remove this and add a arrow to represent new page */}
+                <p className="relative mt-5 text-sm font-semibold text-foreground group-hover:text-primary">
+                  Explore service <span aria-hidden="true">→</span>
+                </p>
+              </Link>
+            );
+          })}
         </div>
+        <Button
+          className="float-right flex items-center gap-2 mt-5"
+          onClick={() => setExpand(!expand)}
+        >
+          {expand ? "Collapse" : "Expand"} service list
+          <IoIosArrowDown className={expand ? "rotate-180" : ""} />
+        </Button>
       </section>
 
       <section className="border-y border-border bg-surface-muted">

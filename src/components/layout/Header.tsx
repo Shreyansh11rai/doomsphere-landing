@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { brand } from "@/config/brand";
-import { IconComp } from "@/components/widgets/icon-comp";
+import { brand } from "@/config/brand.config";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import {
   PAGE_NAVIGATION,
   SERVICE_CATEGORY_TABS,
@@ -12,7 +12,7 @@ import {
   type NavigationIcon,
 } from "@/data/navigation_data";
 import type { ServiceCategory } from "@/data/services_data";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "@/components/shared/Button";
 import Image from "next/image";
 
@@ -230,7 +230,7 @@ function ServicesDirectory({
           </Button>
         </div>
         <div
-          className="mt-5 flex gap-2 overflow-x-auto pb-1"
+          className="mt-5 flex gap-2 overflow-x-auto py-2"
           role="tablist"
           aria-label="Service categories"
         >
@@ -249,7 +249,7 @@ function ServicesDirectory({
             </Button>
           ))}
         </div>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 overflow-y-auto max-h-[55vh]">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 overflow-y-auto max-h-[55vh]">
           {services.map((service) => (
             <Link
               key={service.slug}
@@ -330,7 +330,9 @@ function SearchDirectory({
                           ? "message"
                           : result.category === "Websites"
                             ? "window"
-                            : "spark"
+                            : result.category === "Marketing & Growth"
+                              ? "target"
+                              : "spark"
                     }
                     className="h-5 w-5"
                   />
@@ -402,6 +404,7 @@ function ServiceIcon({ category }: { category: ServiceCategory }) {
     "WhatsApp Services": "message",
     Websites: "window",
     Automations: "spark",
+    "Marketing & Growth": "target",
   } as const;
   return <Icon name={iconName[category]} className="h-5 w-5" />;
 }
@@ -423,6 +426,7 @@ function Icon({
     | "search"
     | "service"
     | "spark"
+    | "target"
     | "window";
 }) {
   const paths = {
@@ -483,6 +487,13 @@ function Icon({
     ),
     spark: (
       <path d="m12 3 1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6ZM19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7Z" />
+    ),
+    target: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 4V2M20 12h2M12 20v2M4 12H2" />
+      </>
     ),
     window: (
       <>

@@ -43,3 +43,8 @@ export interface SubmissionResponse {
   status: string;
   reference: string;
 }
+
+export interface ServicesResponse {
+  id: number;
+  name: string;
+}

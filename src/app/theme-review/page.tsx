@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ThemeReviewView } from "@/features/theme-review/views/theme-review-view";
+import { ThemeReviewView } from "@/components/pages/ThemeReviewPage";
 
 export const metadata: Metadata = {
   title: "Theme review",

@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { PAGE_NAVIGATION } from "@/data/navigation_data";
 import { BiCalendar, BiLinkExternal } from "react-icons/bi";
 import { IoCallOutline } from "react-icons/io5";
-import { LOGO } from "./header";
+import { LOGO } from "./Header";
 import { FaServicestack } from "react-icons/fa";
 import { BsArrowRight } from "react-icons/bs";
 

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
-import { ThemeProvider } from "@/components/layout/theme-provider";
-import { brand } from "@/config/brand";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { brand } from "@/config/brand.config";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Poppins } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { QueryProvider } from "@/components/layout/QueryProvider";
+import { Toaster } from "sonner";
 
 const PoppinsFont = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -66,12 +69,16 @@ export default function RootLayout({
       <body
         className={`max-h-screen relative bg-canvas font-sans text-foreground ${PoppinsFont.className}`}
       >
-        <SpeedInsights />
-        <ThemeProvider>
+        <Toaster position="top-center" />
+        {/* <ThemeProvider> */}
+        <QueryProvider>
           <Header />
           {children}
           <Footer />
-        </ThemeProvider>
+        </QueryProvider>
+        {/* </ThemeProvider> */}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

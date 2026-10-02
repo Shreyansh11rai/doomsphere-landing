@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { brand } from "@/config/brand";
+import { brand } from "@/config/brand.config";
 import { Button } from "@/components/shared/Button";
-import { IconComp } from "@/components/widgets/icon-comp";
+import { IconComp } from "@/components/layout/widgets/IconComp";
 import type { InformationalPageData } from "@/data/pages_data";
 
 interface InformationalPageViewProps {
@@ -22,12 +22,22 @@ export function InformationalPageView({ page }: InformationalPageViewProps) {
               {page.eyebrow}
             </p>
           </div>
+
           <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
             {page.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
             {page.description}
           </p>
+          {/* {page.image && (
+            <div className="sm:hidden w-90 col-start-5 flex items-center justify-end col-span-1">
+              <img
+                src={`/svg/${page.image}`}
+                alt="person planning business"
+                className="object-cover w-full"
+              />
+            </div>
+          )} */}
 
           {page.ctas && page.ctas.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-3">
@@ -45,15 +55,15 @@ export function InformationalPageView({ page }: InformationalPageViewProps) {
             </div>
           )}
         </div>
-        {page.image && (
-          <div className="w-90 col-start-5 flex items-center justify-end col-span-1">
+        {/* {page.image && (
+          <div className="hidden w-90 col-start-5 flex items-center justify-end col-span-1">
             <img
               src={`/svg/${page.image}`}
               alt="person planning business"
               className="object-cover w-full"
             />
           </div>
-        )}
+        )} */}
       </section>
 
       <section className="border-y border-border bg-surface-muted">

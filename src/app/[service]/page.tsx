@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ServicePageView } from "@/components/services/service-page-view";
+import { ServicePageView } from "@/components/pages/services/ServicePageVIew";
 import { SERVICE_SLUGS } from "@/data/services_data";
 import { getServiceBySlug } from "@/lib/services.util";
 import { notFound } from "next/navigation";
