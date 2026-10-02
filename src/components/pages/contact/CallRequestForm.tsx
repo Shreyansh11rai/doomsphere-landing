@@ -14,7 +14,7 @@ const initialValues: CallRequestInput = {
   phone: "",
   services: [],
   slot: undefined as never,
-  reason: "",
+  reason: "New project",
 };
 
 const slots = ["Morning", "Afternoon", "Evening"] as const;

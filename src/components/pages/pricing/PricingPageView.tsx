@@ -3,7 +3,7 @@
 import { brand } from "@/config/brand.config";
 import { Button } from "@/components/shared/Button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { submitPricingInterest } from "@/services/enquiryService";
+// import { submitPricingInterest } from "@/services/enquiryService";
 import { useState } from "react";
 
 export function PricingPageView() {
@@ -11,21 +11,21 @@ export function PricingPageView() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<string>("");
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const payload = {
-      name: String(form.get("name") ?? ""),
-      company: String(form.get("company") ?? ""),
-      contact: String(form.get("contact") ?? ""),
-      serviceId: "general-quote",
-      source: "quote-page",
-    };
+  // async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  //   const form = new FormData(event.currentTarget);
+  //   const payload = {
+  //     name: String(form.get("name") ?? ""),
+  //     company: String(form.get("company") ?? ""),
+  //     contact: String(form.get("contact") ?? ""),
+  //     serviceId: "general-quote",
+  //     source: "quote-page",
+  //   };
 
-    await submitPricingInterest(payload);
-    setMessage("Thanks! Your quote request has been prepared for follow-up.");
-    setIsOpen(false);
-  }
+  //   await submitPricingInterest(payload);
+  //   setMessage("Thanks! Your quote request has been prepared for follow-up.");
+  //   setIsOpen(false);
+  // }
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
@@ -41,7 +41,7 @@ export function PricingPageView() {
           right scope.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Button type="button" onClick={() => setIsOpen(true)} size="lg">
+          <Button href="/contact-us" size="lg">
             Get a Quote
           </Button>
           <Button
@@ -75,7 +75,7 @@ export function PricingPageView() {
               </Button>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            {/* <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               <label className="block text-sm text-muted">
                 <span className="mb-2 block font-semibold text-foreground">
                   Name
@@ -109,7 +109,7 @@ export function PricingPageView() {
               <Button type="submit" size="lg" radius="xl" className="w-full">
                 Get quote
               </Button>
-            </form>
+            </form> */}
           </div>
         </div>
       )}

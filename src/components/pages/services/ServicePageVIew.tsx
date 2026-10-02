@@ -7,7 +7,7 @@ import { Button } from "@/components/shared/Button";
 import { IconComp } from "@/components/layout/widgets/IconComp";
 import { SERVICES_DATA, type ServiceData } from "@/data/services_data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { submitPricingInterest } from "@/services/enquiryService";
+// import { submitPricingInterest } from "@/services/enquiryService";
 
 interface ServicePageViewProps {
   service: ServiceData;
@@ -19,24 +19,24 @@ export function ServicePageView({ service }: ServicePageViewProps) {
   const [isPricingOpen, setIsPricingOpen] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
-  async function handlePricingSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const payload = {
-      name: String(form.get("name") ?? ""),
-      company: String(form.get("company") ?? ""),
-      contact: String(form.get("contact") ?? ""),
-      requirement: String(form.get("requirement") ?? ""),
-      serviceId: service.slug,
-      source: "service-page-quote",
-    };
+  // async function handlePricingSubmit(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  //   const form = new FormData(event.currentTarget);
+  //   const payload = {
+  //     name: String(form.get("name") ?? ""),
+  //     company: String(form.get("company") ?? ""),
+  //     contact: String(form.get("contact") ?? ""),
+  //     requirement: String(form.get("requirement") ?? ""),
+  //     serviceId: service.slug,
+  //     source: "service-page-quote",
+  //   };
 
-    await submitPricingInterest(payload);
-    setStatusMessage(
-      "Thanks! Your quote request has been prepared for follow-up.",
-    );
-    setIsPricingOpen(false);
-  }
+  //   await submitPricingInterest(payload);
+  //   setStatusMessage(
+  //     "Thanks! Your quote request has been prepared for follow-up.",
+  //   );
+  //   setIsPricingOpen(false);
+  // }
 
   return (
     <main>
@@ -98,12 +98,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
             {service.description}
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button
-              type="button"
-              onClick={() => setIsPricingOpen(true)}
-              size="lg"
-              radius="lg"
-            >
+            <Button href="/contact-us" size="lg" radius="lg">
               Get a Quote
             </Button>
             <Button
@@ -386,12 +381,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
             guide the cleanest path.
           </h2>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Button
-              type="button"
-              onClick={() => setIsPricingOpen(true)}
-              size="lg"
-              radius="lg"
-            >
+            <Button href="/contact-us" size="lg" radius="lg">
               Get a Quote
             </Button>
             <Button
@@ -434,7 +424,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
               </Button>
             </div>
 
-            <form onSubmit={handlePricingSubmit} className="mt-6 space-y-4">
+            {/* <form onSubmit={handlePricingSubmit} className="mt-6 space-y-4">
               <label className="block text-sm text-muted">
                 <span className="mb-2 block font-semibold text-foreground">
                   Name
@@ -462,7 +452,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
               <Button type="submit" size="lg" radius="xl" className="w-full">
                 Get quote
               </Button>
-            </form>
+            </form> */}
           </div>
         </div>
       )}

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/shared/Button";
 import { SERVICES_DATA } from "@/data/services_data";
-import { submitEnquiry } from "@/services/enquiryService";
+// import { submitEnquiry } from "@/services/enquiryService";
 import { brand } from "@/config/brand.config";
 import { IoCall } from "react-icons/io5";
 
@@ -30,32 +30,30 @@ export function GlobalEnquiryWidget() {
     [selectedService],
   );
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const payload = {
-      name: String(form.get("name") ?? ""),
-      email: String(form.get("email") ?? ""),
-      mobileNumber: String(form.get("mobileNumber") ?? ""),
-      companyName: String(form.get("companyName") ?? ""),
-      message: String(form.get("message") ?? ""),
-      serviceId: selectedService,
-      messageTemplate,
-    };
+  // async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  //   const form = new FormData(event.currentTarget);
+  //   const payload = {
+  //     name: String(form.get("name") ?? ""),
+  //     email: String(form.get("email") ?? ""),
+  //     mobileNumber: String(form.get("mobileNumber") ?? ""),
+  //     companyName: String(form.get("companyName") ?? ""),
+  //     message: String(form.get("message") ?? ""),
+  //     serviceId: selectedService,
+  //     messageTemplate,
+  //   };
 
-    const result = await submitEnquiry(payload);
-    setStatusMessage(result.message);
-    setIsOpen(false);
-  }
+  //   const result = await submitEnquiry(payload);
+  //   setStatusMessage(result.message);
+  //   setIsOpen(false);
+  // }
 
   return (
     <div className="fixed bottom-4 right-4 z-[70] flex items-center gap-2">
       <Button href={`tel:${brand.contactNumber}`} variant="secondary">
         <IoCall /> {brand.contactNumber}
       </Button>
-      <Button type="button" onClick={() => setIsOpen(true)}>
-        Enquiry
-      </Button>
+      <Button href="/contact-us">Enquiry</Button>
 
       {isOpen && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/40 py-10 px-4 backdrop-blur-sm">
@@ -80,7 +78,7 @@ export function GlobalEnquiryWidget() {
               </div>
             </div>
 
-            <form
+            {/* <form
               onSubmit={handleSubmit}
               className="mt-6 grid gap-4 sm:grid-cols-2"
             >
@@ -155,7 +153,7 @@ export function GlobalEnquiryWidget() {
               <Button type="submit" className="sm:col-span-2">
                 Send enquiry
               </Button>
-            </form>
+            </form> */}
 
             {statusMessage && (
               <p className="mt-4 text-sm font-semibold text-success">
