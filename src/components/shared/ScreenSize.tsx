@@ -1,5 +1,6 @@
 "use client";
 
+import { env } from "node:process";
 import { useEffect, useState } from "react";
 
 const breakpoints = [
@@ -26,12 +27,16 @@ export default function ScreenSize() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  return (
-    <span
-      onDoubleClick={() => setHide(true)}
-      className={`fixed top-5 right-60 z-100 bg-green-400 p-3 rounded-2xl ${hide && "hidden"}`}
-    >
-      {size}
-    </span>
-  );
+  if (env.NODE_ENV === "development") {
+    return (
+      <span
+        onDoubleClick={() => setHide(true)}
+        className={`fixed top-5 right-60 z-100 bg-green-400 p-3 rounded-2xl ${hide && "hidden"}`}
+      >
+        {size}
+      </span>
+    );
+  }
+
+  return null;
 }
