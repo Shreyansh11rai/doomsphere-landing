@@ -2,11 +2,9 @@
 
 import { IconComp } from "@/components/layout/widgets/IconComp";
 import { Button } from "@/components/shared/Button";
-import ScreenSize from "@/components/shared/ScreenSize";
 import { HOME_PAGE_DATA } from "@/data/home_page_data";
 import { SERVICES_DATA } from "@/data/services_data";
 import { HOME_TESTIMONIALS } from "@/data/testimonials_data";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -15,7 +13,6 @@ import { IoIosArrowDown } from "react-icons/io";
 /** Static marketing homepage assembled from the service catalogue. */
 export function HomePageView() {
   const [expand, setExpand] = useState<boolean>(false);
-  useScrollReveal();
   const { hero, proofCards, coreBusiness, serviceOverview, valueCards, cta } =
     HOME_PAGE_DATA;
 
@@ -27,7 +24,7 @@ export function HomePageView() {
           <p className="text-lg text-center font-semibold tracking-[.18em] text-primary uppercase">
             {hero.eyebrow}
           </p>
-          <h1 className="mt-5 text-center max-w-6xl mx-auto text-5xl font-bold tracking-tighter text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 text-center max-w-6xl mx-auto text-4xl font-bold tracking-tighter text-foreground sm:text-6xl lg:text-7xl">
             {hero.title}
           </h1>
           {/* <div className="relative md:hidden mt-5 overflow-hidden rounded-3xl border border-border bg-surface p-4 shadow-[0_18px_50px_-30px_rgb(var(--theme-shadow))]">
@@ -140,11 +137,13 @@ export function HomePageView() {
               {hero.secondaryCta.label}
             </Button>
           </div>
-          <div>
-            <img
-              className="bg-transparent"
-              src="/svg/services/growth.png"
-              alt=""
+          <div className="mx-auto mt-8 flex w-full max-w-sm justify-center sm:mt-12">
+            <Image
+              className="h-auto max-h-56 w-full object-contain sm:max-h-72"
+              src="/img/startup-growth.svg"
+              alt="A growing business supported by digital tools"
+              width={420}
+              height={300}
             />
           </div>
           <div className="mt-20 grid gap-4 sm:grid-cols-3">
@@ -297,20 +296,26 @@ export function HomePageView() {
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
           {serviceOverview.title}
         </h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 sm:mt-10">
           {SERVICES_DATA.map((service, i) => {
             if (i > 5 && !expand) return null;
             return (
               <Link
                 href={`/${service.slug}`}
                 key={service.slug}
-                className="group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:shadow-lg"
+                className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-4 transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-5"
               >
                 <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl transition duration-200 group-hover:scale-110" />
-                <span className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  Icon
-                </span>
-                <p className="relative mt-4 text-sm font-semibold text-primary">
+                <div className="relative flex aspect-[16/8] items-center justify-center overflow-hidden rounded-xl bg-canvas p-3">
+                  <Image
+                    src={service.illustration}
+                    alt=""
+                    width={260}
+                    height={140}
+                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <p className="relative mt-4 text-xs font-semibold tracking-wide text-primary uppercase">
                   {service.eyebrow}
                 </p>
                 <h3 className="relative mt-3 text-xl font-semibold text-foreground">
@@ -319,9 +324,8 @@ export function HomePageView() {
                 <p className="relative mt-2 text-sm leading-6 text-muted">
                   {service.summary}
                 </p>
-                {/* TODO: Remove this and add a arrow to represent new page */}
                 <p className="relative mt-5 text-sm font-semibold text-foreground group-hover:text-primary">
-                  Explore service <span aria-hidden="true">→</span>
+                  Explore service <span aria-hidden="true">↗</span>
                 </p>
               </Link>
             );
@@ -421,9 +425,9 @@ export function HomePageView() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl min-h-[50vh] border-t flex flex-col items-center justify-center  px-6 lg:px-8">
-        <div className="gap-10 grid grid-cols-12">
-          <div className="rounded-2xl col-span-11 sm:col-span-7 py-12">
+      <section className="mx-auto flex min-h-[40vh] max-w-7xl flex-col items-center justify-center border-t px-6 py-14 sm:py-20 lg:px-8">
+        <div className="grid w-full gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-10">
+          <div className="rounded-2xl py-2 sm:py-12">
             <p className="text-lg font-bold text-primary tracking-[.18em] uppercase">
               {cta.eyebrow}
             </p>
@@ -442,11 +446,13 @@ export function HomePageView() {
               </Button>
             </div>
           </div>
-          <div className="mx-auto lg:mx-0 col-span-11 sm:col-span-8 sm:col-start-3 lg:col-span-4">
-            <img
-              src="/svg/next-task.svg"
-              alt="person searching next task"
-              className="h-full w-full object-contain"
+          <div className="mx-auto w-full max-w-sm lg:max-w-xs">
+            <Image
+              src="/img/next-task.svg"
+              alt="A person planning their next business task"
+              width={300}
+              height={250}
+              className="h-auto w-full object-contain"
             />
           </div>
         </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { InformationalPageView } from "@/components/pages/InformationalPageView";
+import { AboutPageView } from "@/components/pages/about/AboutPageView";
 import { PAGES_DATA } from "@/data/pages_data";
 
 export const metadata: Metadata = {
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <InformationalPageView page={PAGES_DATA.about} />;
+  return <AboutPageView />;
 }

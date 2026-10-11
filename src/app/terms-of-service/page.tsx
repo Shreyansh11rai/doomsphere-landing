@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { InformationalPageView } from "@/components/pages/InformationalPageView";
-import { PAGES_DATA } from "@/data/pages_data";
+import { LegalDocumentPage } from "@/components/pages/LegalDocumentPage";
+import { LEGAL_DOCUMENTS } from "@/data/legal_documents_data";
 
 export const metadata: Metadata = {
-  title: "Terms of service",
-  description: PAGES_DATA["terms-of-service"].description,
+  title: "Terms of Service",
+  description:
+    "Review the terms for using DoomSphere's website and engaging digital services.",
   alternates: { canonical: "/terms-of-service" },
 };
 
 export default function TermsOfServicePage() {
-  return <InformationalPageView page={PAGES_DATA["terms-of-service"]} />;
+  return (
+    <LegalDocumentPage
+      document={LEGAL_DOCUMENTS.terms}
+      lastUpdated="October 11, 2026"
+    />
+  );
 }

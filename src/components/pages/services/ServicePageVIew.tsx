@@ -5,19 +5,43 @@ import Link from "next/link";
 import { brand } from "@/config/brand.config";
 import { Button } from "@/components/shared/Button";
 import { IconComp } from "@/components/layout/widgets/IconComp";
+import type { IconName } from "@/data/icons_data";
 import { SERVICES_DATA, type ServiceData } from "@/data/services_data";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { HOME_TESTIMONIALS } from "@/data/testimonials_data";
+import Image from "next/image";
 // import { submitPricingInterest } from "@/services/enquiryService";
 
 interface ServicePageViewProps {
   service: ServiceData;
 }
 
+interface ServiceSectionHeadingProps {
+  icon: IconName;
+  title: string;
+}
+
+function ServiceSectionHeading({ icon, title }: ServiceSectionHeadingProps) {
+  return (
+    <div className="flex items-center gap-4">
+      <span className="inline-flex shrink-0 items-center justify-center rounded-xl bg-primary/10 p-4 text-primary">
+        <IconComp name={icon} className="h-10 w-10" />
+      </span>
+      <h2 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
 /** Reusable service detail template driven by a single service JSON object. */
 export function ServicePageView({ service }: ServicePageViewProps) {
-  useScrollReveal();
   const [isPricingOpen, setIsPricingOpen] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
+  const confirmedTestimonials = (service.testimonials ?? []).filter(
+    (testimonial) => !testimonial.placeholder,
+  );
+  const testimonials =
+    confirmedTestimonials.length > 0 ? confirmedTestimonials : HOME_TESTIMONIALS;
 
   // async function handlePricingSubmit(event: React.FormEvent<HTMLFormElement>) {
   //   event.preventDefault();
@@ -80,23 +104,36 @@ export function ServicePageView({ service }: ServicePageViewProps) {
           className="relative overflow-hidden rounded-3xl border border-border bg-surface p-4 sm:p-6"
         >
           <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
-          <div className="relative flex items-center gap-3">
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <IconComp name={service.icon} className="h-5 w-5" />
+          <div className="relative flex items-center gap-4">
+            <span className="inline-flex shrink-0 items-center justify-center rounded-xl bg-primary/10 p-4 text-primary">
+              <IconComp name={service.icon} className="h-10 w-10" />
             </span>
             <p className="text-sm font-bold tracking-[.18em] text-primary uppercase">
               {service.eyebrow}
             </p>
           </div>
-          <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
-            {service.name}
-          </h1>
+            <p className="mt-5 text-sm font-semibold tracking-wide text-subtle uppercase">
+              What this service is
+            </p>
+            <h1 className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              {service.name}
+            </h1>
           <p className="mt-4 text-lg font-medium text-foreground">
             {service.valueProposition}
           </p>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
             {service.description}
           </p>
+          <div className="mt-5 flex justify-center rounded-2xl bg-canvas p-3 sm:p-5">
+            <Image
+              src={service.illustration}
+              alt={`${service.name} illustration`}
+              width={520}
+              height={300}
+              priority
+              className="h-40 w-full max-w-md object-contain sm:h-52"
+            />
+          </div>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button href="/contact-us" size="lg" radius="lg">
               Get a Quote
@@ -146,17 +183,59 @@ export function ServicePageView({ service }: ServicePageViewProps) {
         </aside>
       </section>
 
+      <section className="border-y border-border bg-surface-muted">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 sm:py-16 lg:grid-cols-2 lg:px-8">
+          <div>
+            <ServiceSectionHeading icon="target" title="Outcomes and benefits" />
+            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              Make the next step easier for your customers and your team.
+            </h3>
+            <div className="mt-5 grid gap-3">
+              {service.timeAndMoneyBenefits.map((benefit) => (
+                <article
+                  key={benefit.title}
+                  className="rounded-xl border border-border bg-surface p-4"
+                >
+                  <h3 className="font-semibold text-foreground">
+                    {benefit.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-muted">
+                    {benefit.detail}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+            <ServiceSectionHeading
+              icon="about"
+              title="Who this service is for"
+            />
+            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              Built around the way your customers already make decisions.
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {service.idealFor.map((audience) => (
+                <li
+                  key={audience}
+                  className="flex gap-3 rounded-xl bg-surface-muted p-4 text-sm leading-6 text-muted"
+                >
+                  <IconComp
+                    name="check"
+                    className="mt-1 h-4 w-4 shrink-0 text-primary"
+                  />
+                  <span>{audience}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {service.problems && service.problems.length > 0 && (
         <section className="border-y border-border bg-surface-muted">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <IconComp name="target" className="h-5 w-5" />
-              </span>
-              <p className="text-sm font-bold tracking-[.18em] text-primary uppercase">
-                What we solve
-              </p>
-            </div>
+            <ServiceSectionHeading icon="target" title="What we solve" />
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {service.problems.map((problem, index) => (
                 <article
@@ -166,9 +245,9 @@ export function ServicePageView({ service }: ServicePageViewProps) {
                   <p className="text-sm font-semibold text-primary">
                     0{index + 1}
                   </p>
-                  <h2 className="mt-4 text-lg font-semibold text-foreground">
+                  <h3 className="mt-4 text-lg font-semibold text-foreground">
                     {problem.title}
-                  </h2>
+                  </h3>
                   <p className="mt-3 text-sm leading-6 text-muted">
                     {problem.description}
                   </p>
@@ -181,14 +260,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
 
       {service.process && service.process.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <IconComp name="compass" className="h-5 w-5" />
-            </span>
-            <p className="text-sm font-bold tracking-[.18em] text-primary uppercase">
-              How it works
-            </p>
-          </div>
+          <ServiceSectionHeading icon="compass" title="How it works" />
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {service.process.map((step, index) => (
               <article
@@ -215,14 +287,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
       {service.features && service.features.length > 0 && (
         <section className="border-y border-border bg-surface-muted">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <IconComp name="book" className="h-5 w-5" />
-              </span>
-              <p className="text-sm font-bold tracking-[.18em] text-primary uppercase">
-                What is included
-              </p>
-            </div>
+            <ServiceSectionHeading icon="book" title="What is included" />
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {service.features.map((feature, index) => (
                 <article
@@ -250,14 +315,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <article className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6">
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <IconComp name="shield" className="h-5 w-5" />
-                </span>
-                <p className="text-sm font-bold tracking-[.14em] text-primary uppercase">
-                  Why choose us
-                </p>
-              </div>
+              <ServiceSectionHeading icon="shield" title="Why choose us" />
               <ul className="mt-5 space-y-3 text-sm leading-6 text-muted">
                 {service.differentiators.map((point) => (
                   <li
@@ -275,14 +333,10 @@ export function ServicePageView({ service }: ServicePageViewProps) {
 
             <article className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6">
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <IconComp name="compass" className="h-5 w-5" />
-                </span>
-                <p className="text-sm font-bold tracking-[.14em] text-primary uppercase">
-                  Delivery clarity
-                </p>
-              </div>
+              <ServiceSectionHeading
+                icon="compass"
+                title="Delivery clarity"
+              />
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {service.timeAndMoneyBenefits.map((benefit) => (
                   <div
@@ -305,26 +359,21 @@ export function ServicePageView({ service }: ServicePageViewProps) {
 
       {/* TODO: Restore the pricing ladder section when public pricing is ready. */}
 
-      {service.testimonials && service.testimonials.length > 0 && (
+      {testimonials.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <IconComp name="chat" className="h-5 w-5" />
-            </span>
-            <p className="text-sm font-bold tracking-[.18em] text-primary uppercase">
-              Social proof
-            </p>
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {service.testimonials.map((item) => (
+          <ServiceSectionHeading icon="chat" title="Customer stories" />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {testimonials.map((item) => (
               <article
                 key={item.name}
                 className="rounded-xl border border-border bg-surface p-6"
               >
-                <p className="text-xs font-semibold tracking-[.14em] text-subtle uppercase">
-                  {item.placeholder ? "Placeholder" : "Client"}
-                </p>
-                {item.rating && (
+                {"businessType" in item && (
+                  <p className="text-xs font-semibold tracking-[.14em] text-subtle uppercase">
+                    {item.businessType}
+                  </p>
+                )}
+                {"rating" in item && item.rating && (
                   <p className="mt-3 text-sm font-semibold text-warning">
                     {item.rating}/5 stars
                   </p>
@@ -333,7 +382,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
                   {item.name}
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  {item.outcome}
+                  {"outcome" in item ? item.outcome : item.quote}
                 </p>
               </article>
             ))}
@@ -344,14 +393,10 @@ export function ServicePageView({ service }: ServicePageViewProps) {
       {service.faqs && service.faqs.length > 0 && (
         <section className="border-y border-border bg-surface-muted">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <IconComp name="faq" className="h-5 w-5" />
-              </span>
-              <p className="text-sm font-bold tracking-[.18em] text-primary uppercase">
-                FAQ
-              </p>
-            </div>
+            <ServiceSectionHeading
+              icon="faq"
+              title="Frequently asked questions"
+            />
             <div className="mt-8 space-y-3">
               {service.faqs.map((item) => (
                 <details
@@ -366,6 +411,23 @@ export function ServicePageView({ service }: ServicePageViewProps) {
                   </p>
                 </details>
               ))}
+            </div>
+            <div className="mt-6 rounded-2xl border border-border bg-surface p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-foreground">
+                Have a question that is specific to your project?
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                Tell us what you are trying to do and we will help you work out
+                the right next step.
+              </p>
+              <Button
+                href={`mailto:${brand.contactEmail}?subject=${encodeURIComponent(`Question about ${service.name}`)}`}
+                variant="secondary"
+                className="mt-4"
+              >
+                <IconComp name="chat" className="h-4 w-4" />
+                Ask a custom question
+              </Button>
             </div>
           </div>
         </section>
@@ -382,6 +444,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
           </h2>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button href="/contact-us" size="lg" radius="lg">
+              <IconComp name="pricing" className="h-4 w-4" />
               Get a Quote
             </Button>
             <Button
@@ -390,6 +453,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
               size="lg"
               radius="lg"
             >
+              <IconComp name="phone" className="h-4 w-4" />
               Call us
             </Button>
           </div>

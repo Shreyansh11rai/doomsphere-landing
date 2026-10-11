@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 const breakpoints = [
@@ -14,11 +16,12 @@ const getBreakpoint = () => {
 };
 
 export default function ScreenSize() {
-  const [size, setSize] = useState(getBreakpoint);
+  const [size, setSize] = useState<string>("base");
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
     const onResize = () => setSize(getBreakpoint());
+    onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);

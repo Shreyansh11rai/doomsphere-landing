@@ -2,14 +2,11 @@
 
 import { useState } from "react";
 import { IconComp } from "@/components/layout/widgets/IconComp";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CallRequestForm } from "@/components/pages/contact/CallRequestForm";
 import { EnquiryForm } from "@/components/pages/contact/EnquiryForm";
 import { useEnquiry } from "@/hooks/useEnquiryMutation";
 
 export function ContactPageView() {
-  useScrollReveal();
-
   const { enquiryMutation, servicesQuery, callRequestMutation } = useEnquiry();
 
   const { data, isLoading, isError, error } = servicesQuery;

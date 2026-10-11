@@ -12,7 +12,7 @@ export function InformationalPageView({ page }: InformationalPageViewProps) {
   return (
     <main className="">
       {/* <section className="mx-auto grid grid-cols-6 gap-10 max-w-7xl px-6 py-20 sm:py-28 lg:px-8"> */}
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28 lg:px-8 flex items-center justify-between gap-10">
+      <section className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-5 py-12 sm:px-6 sm:py-20 lg:flex-row lg:items-center lg:px-8 lg:py-28">
         <div className="">
           <div className="flex items-center gap-3">
             <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">

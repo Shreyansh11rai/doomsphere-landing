@@ -48,6 +48,7 @@ export interface ServiceContent {
 export interface ServiceData extends ServiceContent {
   category: ServiceCategory;
   icon: IconName;
+  illustration: string;
   summary: string;
   eyebrow: string;
   headline: string;
@@ -73,6 +74,34 @@ export const SERVICE_CATEGORIES = [
 
 export type ServiceCategory = (typeof SERVICE_CATEGORIES)[number];
 
+function getServiceIllustration(
+  slug: string,
+  category: ServiceCategory,
+): string {
+  if (/booking|appointment/.test(slug)) return "/img/booking.svg";
+  if (/store|commerce|shop/.test(slug)) return "/img/online-store.svg";
+  if (/whatsapp|chat|conversation/.test(slug)) return "/img/chat-bot.svg";
+  if (/landing/.test(slug)) return "/img/landing-page.svg";
+  if (/website|web-/.test(slug)) return "/img/custom-website.svg";
+  if (/automation|workflow/.test(slug)) return "/img/automation.svg";
+  if (/seo|search/.test(slug)) return "/img/search-results.svg";
+  if (/content/.test(slug)) return "/img/content-marketing.svg";
+  if (/advert|campaign|social/.test(slug)) return "/img/online-ad.svg";
+
+  switch (category) {
+    case "Enquiry":
+      return "/img/booking.svg";
+    case "WhatsApp Services":
+      return "/img/chat-bot.svg";
+    case "Websites":
+      return "/img/custom-website.svg";
+    case "Automations":
+      return "/img/automation.svg";
+    case "Marketing & Growth":
+      return "/img/content-marketing.svg";
+  }
+}
+
 const createService = (
   slug: string,
   name: string,
@@ -96,6 +125,7 @@ const createService = (
   name,
   category,
   icon,
+  illustration: getServiceIllustration(slug, category),
   summary,
   eyebrow,
   headline,
@@ -114,8 +144,28 @@ const createService = (
   process: content?.process ?? [],
   differentiators: content?.differentiators ?? [],
   pricing: content?.pricing ?? [],
-  // testimonials: content?.testimonials ?? [],
-  faqs: content?.faqs ?? [],
+  testimonials: content?.testimonials ?? [],
+  faqs: [
+    {
+      question: `How does ${name.toLowerCase()} help my business?`,
+      answer: `${summary} We begin with the customer or team need behind the request, then shape a focused solution to make the next step clearer and easier to manage.`,
+    },
+    {
+      question: "Who is this service for?",
+      answer: `This is suited to ${idealFor.join("; ")}. We will check your goals and current setup before recommending a scope.`,
+    },
+    {
+      question: "Why work with DoomSphere?",
+      answer:
+        "We listen to the business need before recommending technology, keep communication straightforward, and explain the scope and trade-offs so you can make an informed decision.",
+    },
+    {
+      question: "How are service charges decided?",
+      answer:
+        "Charges depend on your requirements, integrations, content, and delivery complexity. A fixed pricing ladder can mean a smaller requirement pays for features it does not need, while a larger requirement may hit a tier's feature cap. We discuss your needs first and provide a tailored quote, so the scope and price fit the work rather than forcing your project into a package.",
+    },
+    ...(content?.faqs ?? []),
+  ],
   faq: [
     {
       question: "Is this tailored to our business?",

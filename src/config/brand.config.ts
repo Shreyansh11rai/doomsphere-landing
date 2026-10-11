@@ -15,6 +15,7 @@ export const brand = {
   supportEmail: "support@doomsphere.com",
   contactNumber: "+918858191942",
   whatsapp: "+919044483322",
+  address: "Mani, Phoolpur, Varanasi, Uttar Pradesh 221206",
   offer: {
     eyebrow: "Independence Day Offer",
     title:

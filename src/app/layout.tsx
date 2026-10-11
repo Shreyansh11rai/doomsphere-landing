@@ -9,7 +9,7 @@ import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { QueryProvider } from "@/components/layout/QueryProvider";
 import { Toaster } from "sonner";
-import ScreenSize from "@/components/shared/ScreenSize";
+import { ScrollAnimations } from "@/components/shared/ScrollAnimations";
 
 const PoppinsFont = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -75,6 +75,7 @@ export default function RootLayout({
         <QueryProvider>
           <Header />
           {children}
+          <ScrollAnimations />
           <Footer />
         </QueryProvider>
         {/* </ThemeProvider> */}

@@ -10,30 +10,24 @@ export interface NavigationItem {
 export type NavigationIcon = "about" | "contact" | "faq" | "home" | "service";
 
 export const PAGE_NAVIGATION: readonly NavigationItem[] = [
-  {
-    href: "/",
-    label: "Home",
-    description: "Explore what we do.",
-    icon: "home",
-  },
-  {
-    href: "/about",
-    label: "About us",
-    description: "Meet the way we work.",
-    icon: "about",
-  },
+  // {
+  //   href: "/about",
+  //   label: "About us",
+  //   description: "Meet the way we work.",
+  //   icon: "about",
+  // },
   {
     href: "/contact-us",
     label: "Contact us",
     description: "Start a conversation.",
     icon: "contact",
   },
-  {
-    href: "/faq",
-    label: "FAQ",
-    description: "Find useful answers.",
-    icon: "faq",
-  },
+  // {
+  //   href: "/faq",
+  //   label: "FAQ",
+  //   description: "Find useful answers.",
+  //   icon: "faq",
+  // },
 ];
 
 export const SERVICE_CATEGORY_TABS: readonly (
@@ -47,6 +41,20 @@ export const SERVICE_CATEGORY_TABS: readonly (
   "Automations",
   "Marketing & Growth",
 ];
+
+export const SERVICE_CATEGORY_ROUTES: Readonly<
+  Record<ServiceCategory, string>
+> = {
+  Enquiry: "enquiry",
+  "WhatsApp Services": "whatsapp",
+  Websites: "websites",
+  Automations: "automations",
+  "Marketing & Growth": "marketing-growth",
+};
+
+export function getServiceCategoryHref(category: ServiceCategory): string {
+  return `/services/${SERVICE_CATEGORY_ROUTES[category]}`;
+}
 
 export function getServicesForCategory(
   category: "All services" | ServiceCategory,
