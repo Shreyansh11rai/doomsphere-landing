@@ -71,7 +71,7 @@ export const HOME_PAGE_DATA = {
   },
   serviceOverview: {
     eyebrow: "Choose what needs attention now",
-    title: "Small, useful services for real customer needs.",
+    title: "Services curated for real customer needs.",
   },
   valueCards: [
     {

@@ -6,6 +6,7 @@ import { IoCallOutline } from "react-icons/io5";
 import { LOGO } from "./Header";
 import { FaServicestack } from "react-icons/fa";
 import { BsArrowRight } from "react-icons/bs";
+import Image from "next/image";
 
 export function Footer() {
   const footerPageLinks = PAGE_NAVIGATION;
@@ -16,11 +17,15 @@ export function Footer() {
         {/* brand and CTAs  */}
         <div className="border-b border-border pb-7">
           <div className="flex items-center gap-4">
-            <span
-              aria-hidden="true"
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-base font-bold tracking-tight text-primary-foreground shadow-sm"
-            >
+            <span aria-hidden="true" className="">
               <LOGO brandNameClass={"hidden"} />
+              <Image
+                alt="ashok stambh"
+                className="rounded-full mt-2"
+                height={40}
+                width={40}
+                src={"/ashok-stambh.jpeg"}
+              />
             </span>
             <div>
               <p className="text-base font-bold tracking-tight text-foreground">
@@ -29,9 +34,12 @@ export function Footer() {
               <p className="mt-0.5 text-sm text-muted">
                 Digital solutions with measurable momentum.
               </p>
+              <span className=" text-base text-primary flex items-center gap-2 font-bold tracking-tight text-foreground">
+                URN: UDYAM-UP-75-0207973
+              </span>
             </div>
           </div>
-          <div className="*:w-full grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mt-5">
+          <div className="*:w-full mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {/* email  */}
             <a
               className="group inline-flex min-w-min items-center gap-3 rounded-xl border border-border bg-canvas px-4 py-3 text-left transition-colors hover:border-primary hover:bg-surface-muted"
@@ -41,12 +49,15 @@ export function Footer() {
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <EmailIcon />
               </span>
-              <span>
+              <span className="flex flex-col">
                 <span className="block text-xs font-semibold tracking-[0.12em] text-subtle uppercase">
-                  Start a conversation
+                  Conversation or support
                 </span>
                 <span className="mt-0.5 text-sm font-semibold text-foreground group-hover:text-primary">
                   {brand.contactEmail}
+                </span>
+                <span className="mt-0.5 text-sm font-semibold text-foreground group-hover:text-primary">
+                  {brand.supportEmail}
                 </span>
               </span>
             </a>

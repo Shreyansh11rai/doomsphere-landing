@@ -107,6 +107,19 @@ export function Header() {
             );
           })}
         </nav>
+        <span className="flex items-center gap-2">
+          <Image
+            alt="ashok stambh"
+            className="rounded-full mt-2"
+            height={40}
+            width={40}
+            src={"/ashok-stambh.jpeg"}
+          />
+          <span className=" text-base text-primary flex items-center mt-1 gap-2 font-bold tracking-tight text-foreground">
+            URN: UDYAM-UP-75-0207973
+          </span>
+        </span>
+
         <div className="ml-auto flex items-center gap-2">
           <Button
             type="button"

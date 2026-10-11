@@ -12,6 +12,7 @@ export const brand = {
     apple: "/apple-icon.png",
   },
   contactEmail: "hello@doomsphere.com",
+  supportEmail: "support@doomsphere.com",
   contactNumber: "+918858191942",
   whatsapp: "+919044483322",
   offer: {

@@ -2,6 +2,7 @@
 
 import { IconComp } from "@/components/layout/widgets/IconComp";
 import { Button } from "@/components/shared/Button";
+import ScreenSize from "@/components/shared/ScreenSize";
 import { HOME_PAGE_DATA } from "@/data/home_page_data";
 import { SERVICES_DATA } from "@/data/services_data";
 import { HOME_TESTIMONIALS } from "@/data/testimonials_data";
@@ -19,14 +20,14 @@ export function HomePageView() {
     HOME_PAGE_DATA;
 
   return (
-    <main>
+    <main className="flex flex-col items-center">
       <section className="mx-auto max-w-7xl px-6 py-10 sm:py-20 lg:px-8 lg:py-28">
         {/* <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_26rem]"> */}
         <div>
           <p className="text-lg text-center font-semibold tracking-[.18em] text-primary uppercase">
             {hero.eyebrow}
           </p>
-          <h1 className="mt-5 text-center max-w-6xl mx-auto text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 text-center max-w-6xl mx-auto text-5xl font-bold tracking-tighter text-foreground sm:text-6xl lg:text-7xl">
             {hero.title}
           </h1>
           {/* <div className="relative md:hidden mt-5 overflow-hidden rounded-3xl border border-border bg-surface p-4 shadow-[0_18px_50px_-30px_rgb(var(--theme-shadow))]">
@@ -125,7 +126,7 @@ export function HomePageView() {
           <p className="mt-6 max-w-2xl text-center mx-auto leading-8 text-muted">
             {hero.description}
           </p>
-          <div className="mt-10 mx-auto max-w-sm">
+          <div className="mt-5 md:mt-10 mx-auto max-w-sm flex flex-col sm:flex-row gap-5 items-center">
             <Button href={hero.primaryCta.href} size="lg" radius="lg">
               {hero.primaryCta.label}
             </Button>
@@ -134,7 +135,7 @@ export function HomePageView() {
               variant="secondary"
               size="lg"
               radius="lg"
-              className="ml-5"
+              className=""
             >
               {hero.secondaryCta.label}
             </Button>
@@ -146,22 +147,26 @@ export function HomePageView() {
               alt=""
             />
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-20 grid gap-4 sm:grid-cols-3">
             {proofCards.map((item) => (
               <div
                 key={item.title}
                 className="group relative overflow-hidden rounded-xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
-                <div className="relative flex items-start gap-3">
-                  <span className="inline-flex p-4 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <IconComp name={item.icon} className="h-10 w-10" />
-                  </span>
-                  <div>
-                    <p className="text-lg font-semibold text-primary">
+                <div className="absolute -right-6 -top-6 md:h-20 md:w-20 rounded-full bg-primary/10 blur-2xl" />
+
+                <div className="relative flex gap-4 sm:flex-col sm:items-start lg:flex-row">
+                  <span className="flex flex-col p-4 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <IconComp name={item.icon} className="h-10 w-10" />{" "}
+                    <p className="text-lg font-semibold text-primary hidden sm:block lg:hidden">
                       {item.title}
                     </p>
-                    <p className="mt-2 text-sm leading-6 text-muted">
+                  </span>
+                  <div className="flex flex-col">
+                    <p className="text-lg font-semibold text-primary sm:hidden lg:block">
+                      {item.title}
+                    </p>
+                    <p className="text-sm leading-6 text-muted">
                       {item.description}
                     </p>
                   </div>
@@ -257,7 +262,7 @@ export function HomePageView() {
         {/* </div> */}
       </section>
 
-      <section className="relative border-y border-border bg-surface-muted">
+      {/* <section className="relative border-y border-border bg-surface-muted">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 relative z-1">
           <p className="text-lg font-bold tracking-[.18em] text-primary uppercase">
             {coreBusiness.eyebrow}
@@ -274,14 +279,18 @@ export function HomePageView() {
             </div>
           </div>
         </div>
+        <div></div>
         <img
           src="/svg/handshake-deal.svg"
           alt="handshake trust"
           className="h-40 absolute right-0 top-0 z-0"
         />
-      </section>
+      </section> */}
 
-      <section id="services" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <section
+        id="services"
+        className="mx-auto max-w-7xl px-6 py-20 lg:px-8 border-t border-border"
+      >
         <p className="text-lg font-bold tracking-[.18em] text-primary uppercase">
           {serviceOverview.eyebrow}
         </p>
@@ -299,20 +308,7 @@ export function HomePageView() {
               >
                 <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl transition duration-200 group-hover:scale-110" />
                 <span className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <IconComp
-                    name={
-                      service.category === "Enquiry"
-                        ? "calendar"
-                        : service.category === "WhatsApp Services"
-                          ? "message"
-                          : service.category === "Websites"
-                            ? "window"
-                            : service.category === "Marketing & Growth"
-                              ? "target"
-                              : "spark"
-                    }
-                    className="h-5 w-5"
-                  />
+                  Icon
                 </span>
                 <p className="relative mt-4 text-sm font-semibold text-primary">
                   {service.eyebrow}
@@ -340,17 +336,17 @@ export function HomePageView() {
         </Button>
       </section>
 
-      <section className="border-y border-border bg-surface-muted">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <section className="border-y border-border max-w-7xl  px-6 py-20 lg:px-8">
+        <div className="mx-auto min-w-sm ">
           <div className="grid gap-6 lg:grid-cols-3">
             {valueCards.map((item) => (
               <article
                 key={item.title}
-                className="group relative overflow-hidden rounded-xl border border-border bg-surface p-6 transition duration-200 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-xl border border-border p-6 transition duration-200 hover:-translate-y-1"
               >
-                <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <IconComp name={item.icon} className="h-5 w-5" />
+                <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/40 blur-2xl" />
+                <span className="inline-flex p-5 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <IconComp name={item.icon} className="h-10 w-10" />
                 </span>
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
                   {item.title}
@@ -425,30 +421,34 @@ export function HomePageView() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl flex items-center gap-10 flex-wrap justify-between px-6 lg:px-8">
-        <div className="rounded-2xl px-7 py-12 sm:px-12">
-          <p className="text-lg font-bold text-primary tracking-[.18em] uppercase">
-            {cta.eyebrow}
-          </p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-semibold">{cta.title}</h2>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button
-              href={cta.primaryCta.href}
-              variant="secondary"
-              size="lg"
-              radius="lg"
-              className="border-border/40 text-primary hover:bg-surface/20"
-            >
-              {cta.primaryCta.label}
-            </Button>
+      <section className="mx-auto max-w-7xl min-h-[50vh] border-t flex flex-col items-center justify-center  px-6 lg:px-8">
+        <div className="gap-10 grid grid-cols-12">
+          <div className="rounded-2xl col-span-11 sm:col-span-7 py-12">
+            <p className="text-lg font-bold text-primary tracking-[.18em] uppercase">
+              {cta.eyebrow}
+            </p>
+            <h2 className="mt-3 max-w-2xl text-3xl font-semibold">
+              {cta.title}
+            </h2>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Button
+                href={cta.primaryCta.href}
+                variant="secondary"
+                size="lg"
+                radius="lg"
+                className="border-border/40 text-primary hover:bg-surface/20"
+              >
+                {cta.primaryCta.label}
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="h-60 mx-auto lg:mx-0 ">
-          <img
-            src="/svg/next-task.svg"
-            alt="person searching next task"
-            className="h-full w-full object-cover"
-          />
+          <div className="mx-auto lg:mx-0 col-span-11 sm:col-span-8 sm:col-start-3 lg:col-span-4">
+            <img
+              src="/svg/next-task.svg"
+              alt="person searching next task"
+              className="h-full w-full object-contain"
+            />
+          </div>
         </div>
       </section>
     </main>
