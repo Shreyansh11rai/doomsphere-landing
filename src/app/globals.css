@@ -88,7 +88,7 @@ a {
 
 @layer components {
   .ui-button {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out shadow-[0_10px_25px_-20px_rgb(var(--theme-shadow))] hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm transition-all duration-200 ease-out shadow-[0_10px_25px_-20px_rgb(var(--theme-shadow))] hover:-translate-y-0.5;
     border-color: color-mix(in srgb, var(--theme-border) 82%, transparent);
   }
 

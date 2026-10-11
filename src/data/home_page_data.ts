@@ -28,18 +28,17 @@ export interface HomePageInsightCardData {
 
 export const HOME_PAGE_DATA = {
   hero: {
-    eyebrow: "Sustainable digital growth for businesses",
-    title:
-      "Tailored services to eliminate business blockers, and inefficiencies",
+    eyebrow: "Websites · Lead Capture · Business Automation",
+    title: "Websites that bring you customers, not just visitors.",
     description:
-      "We help teams present their business professionally on the internet, find the inefficiencies, and reduce the manual work that slows business growth.",
+      "We build your online presence, capture leads, and automate your daily operations, so you spend less time on admin and more on growth.",
     primaryCta: {
       href: "#services",
       label: "Explore services",
     },
     secondaryCta: {
       href: "/contact-us",
-      label: "Talk to our team",
+      label: "Get a free consultation",
     },
   },
   proofCards: [

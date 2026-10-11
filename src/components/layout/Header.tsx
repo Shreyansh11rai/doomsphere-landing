@@ -73,7 +73,7 @@ export function Header() {
       className="sticky top-0 left-0 z-50 border-b border-border/80 shadow-sm bg-surface-muted"
     >
       {/* <OfferBanner /> */}
-      <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-2 sm:px-6 lg:px-8">
         <LOGO brandNameClass={"hidden sm:block"} />
         <nav
           className="flex items-center gap-1"
@@ -99,7 +99,7 @@ export function Header() {
             return (
               <Link
                 key={item.href}
-                className={` hidden rounded-full px-3 py-2 text-sm font-semibold transition-colors lg:inline-flex ${isActive ? "bg-primary text-primary-foreground" : "text-muted hover:bg-surface-muted hover:text-foreground"}`}
+                className={`hidden rounded-full px-3 py-1 text-sm transition-colors lg:inline-flex ${isActive ? "bg-primary text-primary-foreground" : "text-muted hover:bg-surface-muted hover:text-foreground"}`}
                 href={item.href}
               >
                 {item.label}
@@ -526,7 +526,7 @@ export const LOGO = ({
   logoClass?: string | null;
 }) => {
   return (
-    <div className="flex items-center gap-2">
+    <Link className="flex items-center gap-2" href="/">
       <Image
         alt="logo-image"
         width={35}
@@ -534,9 +534,9 @@ export const LOGO = ({
         className={`object-cover ${logoClass}`}
         src="/web-app-manifest-192x192.png"
       ></Image>
-      <Link href="/" className={`text-xl font-semibold ${brandNameClass}`}>
+      {/* <Link href="/" className={`text-xl font-semibold ${brandNameClass}`}>
         DoomSphere
-      </Link>
-    </div>
+      </Link> */}
+    </Link>
   );
 };
