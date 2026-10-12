@@ -71,14 +71,14 @@ export default function RootLayout({
         className={`max-h-screen relative bg-canvas font-sans text-foreground ${PoppinsFont.className}`}
       >
         <Toaster position="top-center" />
-        {/* <ThemeProvider> */}
-        <QueryProvider>
-          <Header />
-          {children}
-          <ScrollAnimations />
-          <Footer />
-        </QueryProvider>
-        {/* </ThemeProvider> */}
+        <ThemeProvider>
+          <QueryProvider>
+            <Header />
+            {children}
+            <ScrollAnimations />
+            <Footer />
+          </QueryProvider>
+        </ThemeProvider>
         <SpeedInsights />
         <Analytics />
       </body>
