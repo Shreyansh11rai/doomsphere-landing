@@ -38,26 +38,28 @@ export function Footer() {
           </div>
           <div className="*:w-full mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {/* email  */}
-            <a
-              className="group inline-flex min-w-min items-center gap-3 rounded-xl border border-border bg-canvas px-4 py-3 text-left transition-colors hover:border-primary hover:bg-surface-muted"
-              href={`mailto:${brand.contactEmail}`}
-              aria-label={`Email ${brand.name} at ${brand.contactEmail}`}
-            >
+            <span className="group inline-flex min-w-min items-center gap-3 rounded-xl border border-border bg-canvas px-4 py-3 text-left transition-colors hover:border-primary hover:bg-surface-muted">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <EmailIcon />
               </span>
               <span className="flex flex-col">
-                <span className="block text-xs font-semibold tracking-[0.12em] text-subtle uppercase">
+                {/* <span className="block text-xs font-semibold tracking-[0.12em] text-subtle uppercase">
                   Conversation or support
-                </span>
-                <span className="mt-0.5 text-sm font-semibold text-foreground group-hover:text-primary">
+                </span> */}
+                <a
+                  href={`mailto:${brand.contactEmail}`}
+                  className="mt-0.5 text-sm font-semibold text-foreground hover:text-primary"
+                >
                   {brand.contactEmail}
-                </span>
-                <span className="mt-0.5 text-sm font-semibold text-foreground group-hover:text-primary">
+                </a>
+                <a
+                  href={`mailto:${brand.supportEmail}`}
+                  className="mt-1.0 text-sm font-semibold text-foreground hover:text-primary"
+                >
                   {brand.supportEmail}
-                </span>
+                </a>
               </span>
-            </a>
+            </span>
             {/* call  */}
             <a
               className="group min-w-min inline-flex w-fit items-center gap-3 rounded-xl border border-border bg-canvas px-4 py-3 text-left transition-colors hover:border-primary hover:bg-surface-muted"
