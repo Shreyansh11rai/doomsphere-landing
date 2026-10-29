@@ -19,7 +19,6 @@ export function HomePageView() {
   return (
     <main className="flex flex-col items-center">
       <section className="mx-auto max-w-7xl px-6 py-10 sm:py-20 lg:px-8 lg:py-28">
-        {/* <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_26rem]"> */}
         <div>
           <p className="text-lg text-center font-semibold tracking-[.18em] text-primary uppercase">
             {hero.eyebrow}
@@ -27,116 +26,32 @@ export function HomePageView() {
           <h1 className="mt-5 text-center max-w-6xl mx-auto text-4xl font-bold tracking-tighter text-foreground sm:text-6xl lg:text-7xl">
             {hero.title}
           </h1>
-          {/* <div className="relative md:hidden mt-5 overflow-hidden rounded-3xl border border-border bg-surface p-4 shadow-[0_18px_50px_-30px_rgb(var(--theme-shadow))]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(36,99,235,0.16),_transparent_60%)]" />
-            <div className="rounded-2xl bg-surface-muted p-4">
-              <svg
-                viewBox="0 0 420 320"
-                className="h-full w-full"
-                role="img"
-                aria-label="Abstract business growth illustration"
-              >
-                <defs>
-                  <linearGradient
-                    id="shapeGradient"
-                    x1="0"
-                    y1="0"
-                    x2="1"
-                    y2="1"
-                  >
-                    <stop offset="0%" stopColor="#2563eb" stopOpacity="0.30" />
-                    <stop
-                      offset="100%"
-                      stopColor="#60a5fa"
-                      stopOpacity="0.08"
-                    />
-                  </linearGradient>
-                </defs>
-                <rect
-                  x="18"
-                  y="18"
-                  width="384"
-                  height="284"
-                  rx="30"
-                  fill="#ffffff"
-                />
-                <circle cx="96" cy="104" r="58" fill="url(#shapeGradient)" />
-                <circle
-                  cx="300"
-                  cy="82"
-                  r="54"
-                  fill="#bfdbfe"
-                  fillOpacity="0.45"
-                />
-                <path
-                  d="M58 216c40-45 73-55 118-38 28 11 45 18 73 10 28-8 59-34 97-58"
-                  fill="none"
-                  stroke="#2563eb"
-                  strokeWidth="10"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M72 196c23-18 42-27 71-24 34 3 61 20 87 18 27-2 46-13 82-41"
-                  fill="none"
-                  stroke="#0f172a"
-                  strokeOpacity="0.14"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                />
-                <rect
-                  x="224"
-                  y="142"
-                  width="108"
-                  height="82"
-                  rx="16"
-                  fill="#2563eb"
-                  fillOpacity="0.12"
-                />
-                <rect
-                  x="242"
-                  y="164"
-                  width="60"
-                  height="14"
-                  rx="7"
-                  fill="#2563eb"
-                  fillOpacity="0.8"
-                />
-                <rect
-                  x="242"
-                  y="190"
-                  width="72"
-                  height="10"
-                  rx="5"
-                  fill="#60a5fa"
-                />
-                <rect
-                  x="242"
-                  y="208"
-                  width="48"
-                  height="10"
-                  rx="5"
-                  fill="#93c5fd"
-                />
-              </svg>
-            </div>
-          </div> */}
           <p className="mt-6 max-w-2xl text-center mx-auto leading-8 text-muted">
             {hero.description}
           </p>
-          <div className="mt-5 md:mt-10 mx-auto max-w-sm flex flex-col sm:flex-row gap-5 items-center">
-            <Button href={hero.primaryCta.href} size="lg" radius="lg">
-              {hero.primaryCta.label}
-            </Button>
-            <Button
-              href={hero.secondaryCta.href}
-              variant="secondary"
-              size="lg"
-              radius="lg"
-              className=""
-            >
-              {hero.secondaryCta.label}
-            </Button>
+
+          <div className="flex items-center justify-center">
+            <div className="mt-5 md:mt-10 mx-auto flex flex-col sm:flex-row gap-5">
+              <Button
+                href={hero.primaryCta.href}
+                size="lg"
+                radius="lg"
+                className="text-lg"
+              >
+                {hero.primaryCta.label}
+              </Button>
+              <Button
+                href={hero.secondaryCta.href}
+                variant="secondary"
+                size="lg"
+                radius="lg"
+                className="text-lg"
+              >
+                {hero.secondaryCta.label}
+              </Button>
+            </div>
           </div>
+
           <div className="mx-auto mt-8 flex w-full max-w-sm justify-center sm:mt-12">
             <Image
               className="h-auto max-h-56 w-full object-contain sm:max-h-72"
@@ -174,117 +89,7 @@ export function HomePageView() {
             ))}
           </div>
         </div>
-
-        {/* <div className="relative hidden lg:block overflow-hidden rounded-3xl border border-border bg-surface p-4 shadow-[0_18px_50px_-30px_rgb(var(--theme-shadow))]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(36,99,235,0.16),_transparent_60%)]" />
-          <div className="rounded-2xl bg-surface-muted p-4">
-            <svg
-              viewBox="0 0 420 320"
-              className="h-full w-full"
-              role="img"
-              aria-label="Abstract business growth illustration"
-            >
-              <defs>
-                <linearGradient id="shapeGradient" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#2563eb" stopOpacity="0.30" />
-                  <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.08" />
-                </linearGradient>
-              </defs>
-              <rect
-                x="18"
-                y="18"
-                width="384"
-                height="284"
-                rx="30"
-                fill="#ffffff"
-              />
-              <circle cx="96" cy="104" r="58" fill="url(#shapeGradient)" />
-              <circle
-                cx="300"
-                cy="82"
-                r="54"
-                fill="#bfdbfe"
-                fillOpacity="0.45"
-              />
-              <path
-                d="M58 216c40-45 73-55 118-38 28 11 45 18 73 10 28-8 59-34 97-58"
-                fill="none"
-                stroke="#2563eb"
-                strokeWidth="10"
-                strokeLinecap="round"
-              />
-              <path
-                d="M72 196c23-18 42-27 71-24 34 3 61 20 87 18 27-2 46-13 82-41"
-                fill="none"
-                stroke="#0f172a"
-                strokeOpacity="0.14"
-                strokeWidth="6"
-                strokeLinecap="round"
-              />
-              <rect
-                x="224"
-                y="142"
-                width="108"
-                height="82"
-                rx="16"
-                fill="#2563eb"
-                fillOpacity="0.12"
-              />
-              <rect
-                x="242"
-                y="164"
-                width="60"
-                height="14"
-                rx="7"
-                fill="#2563eb"
-                fillOpacity="0.8"
-              />
-              <rect
-                x="242"
-                y="190"
-                width="72"
-                height="10"
-                rx="5"
-                fill="#60a5fa"
-              />
-              <rect
-                x="242"
-                y="208"
-                width="48"
-                height="10"
-                rx="5"
-                fill="#93c5fd"
-              />
-            </svg>
-          </div>
-        </div> */}
-        {/* </div> */}
       </section>
-
-      {/* <section className="relative border-y border-border bg-surface-muted">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 relative z-1">
-          <p className="text-lg font-bold tracking-[.18em] text-primary uppercase">
-            {coreBusiness.eyebrow}
-          </p>
-          <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                {coreBusiness.title}
-              </h2>
-            </div>
-            <div className="space-y-3 text-base leading-7 text-muted">
-              <p>{coreBusiness.description}</p>
-              <p>{coreBusiness.descriptionSecondary}</p>
-            </div>
-          </div>
-        </div>
-        <div></div>
-        <img
-          src="/svg/handshake-deal.svg"
-          alt="handshake trust"
-          className="h-40 absolute right-0 top-0 z-0"
-        />
-      </section> */}
 
       <section
         id="services"
@@ -379,10 +184,10 @@ export function HomePageView() {
             >
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
               <div className="relative flex items-center gap-4">
-                {testimonial.image ? (
+                {testimonial.photo ? (
                   <Image
-                    src={testimonial.image.src}
-                    alt={testimonial.image.alt}
+                    src={testimonial.photo}
+                    alt={testimonial.name}
                     width={64}
                     height={64}
                     className="h-16 w-16 rounded-xl object-cover"
@@ -397,7 +202,7 @@ export function HomePageView() {
                     {testimonial.name}
                   </h3>
                   <p className="mt-1 text-sm text-muted">
-                    {testimonial.businessType}
+                    {testimonial.business}
                   </p>
                 </div>
               </div>

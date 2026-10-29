@@ -1,31 +1,50 @@
 export interface HomeTestimonialData {
-  name: string;
-  businessType: string;
-  rating: 4 | 5;
+  id: string;
   quote: string;
-  image?: {
-    src: string;
-    alt: string;
-  };
+  name: string;
+  role: string;
+  business: string;
+  photo?: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  problem?: string;
+  result?: string;
+  projectType?: string;
+  sourceUrl?: string;
+  date: string;
+  approved?: boolean;
+  featured: boolean;
 }
 
 export const HOME_TESTIMONIALS: readonly HomeTestimonialData[] = [
   {
-    name: "Shivam Rai",
-    businessType: "Restaurant owner",
-    rating: 5,
+    id: "zaytro",
+    name: "Vishal Singh",
+    role: "Founder",
+    business: "Zaytro Masala",
+    photo: "/testimonials/vishal.jpeg",
     quote:
-      "The website made our restaurant feel more dependable online. Customers now understand the menu, timing, and enquiry path much faster.",
+      "Customers can explore our masala range and current offers without messaging us first. The website also helps people feel more confident about our brand.",
+    rating: 5,
+    result:
+      "Customers can browse the product lineup and offers independently, while the website presents the brand more clearly and builds consumer trust.",
+    projectType: "static_website",
+    sourceUrl: "https://zaytromasala.com",
+    date: "2026-10-29",
+    featured: true,
   },
   {
+    id: "gopesh-singh",
     name: "Gopesh Singh",
-    businessType: "Automotive agency",
+    role: "Car dealer",
+    business: "Car listings and bookings",
     rating: 4,
     quote:
-      "The service pages helped us explain our automotive work clearly and brought better qualified enquiries from local customers.",
-    image: {
-      src: "/testimonials/gopesh-singh-test-image.png",
-      alt: "Gopesh Singh",
-    },
+      "Car listings and request a booking features helped me get bookings without visiting client or waiting for me to be available.",
+    result:
+      "Customers can explore available cars and request bookings online without an in-person visit or the dealer being present.",
+    photo: "/testimonials/gopesh-singh-test-image.png",
+    projectType: "static_website",
+    date: "2026-10-29",
+    featured: true,
   },
 ] as const;
