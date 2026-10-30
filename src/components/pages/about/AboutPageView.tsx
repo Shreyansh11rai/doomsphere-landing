@@ -3,6 +3,8 @@ import { IconComp } from "@/components/layout/widgets/IconComp";
 import { Button } from "@/components/shared/Button";
 import { ABOUT_PAGE_DATA } from "@/data/about_page_data";
 import { brand } from "@/config/brand.config";
+import { BsMailbox } from "react-icons/bs";
+import { IoMail, IoMailSharp } from "react-icons/io5";
 
 export function AboutPageView() {
   return (
@@ -23,12 +25,7 @@ export function AboutPageView() {
             <Button href="/contact-us" size="lg" radius="lg">
               Start a conversation
             </Button>
-            <Button
-              href="/#services"
-              variant="secondary"
-              size="lg"
-              radius="lg"
-            >
+            <Button href="/#services" variant="secondary" size="lg" radius="lg">
               Explore services
             </Button>
           </div>
@@ -39,45 +36,80 @@ export function AboutPageView() {
             aria-hidden="true"
             className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/10 blur-3xl"
           />
-          {ABOUT_PAGE_DATA.founderImage ? (
-            <Image
-              src={ABOUT_PAGE_DATA.founderImage}
-              alt={ABOUT_PAGE_DATA.founderImageAlt}
-              width={360}
-              height={420}
-              priority
-              className="relative h-full max-h-72 w-full rounded-2xl object-cover"
-            />
-          ) : (
-            <div className="relative flex h-44 w-44 items-center justify-center rounded-full border border-primary/20 bg-canvas text-5xl font-semibold tracking-tight text-primary sm:h-52 sm:w-52 sm:text-6xl">
-              DS
-            </div>
-          )}
+          <div className="relative flex h-44 w-44 items-center justify-center rounded-full border border-primary/20 bg-canvas text-5xl font-semibold tracking-tight text-primary sm:h-52 sm:w-52 sm:text-6xl">
+            DS
+          </div>
           <p className="absolute bottom-5 left-5 right-5 text-center text-sm font-medium text-muted">
             A small team, focused on work that helps.
           </p>
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface-muted">
+      {/* <section className="border-y border-border bg-surface-muted">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:px-8">
           <div>
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <span className="inline-flex p-2 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <IconComp name="about" className="h-10 w-10" />
               </span>
               <p className="text-sm font-bold tracking-[.16em] text-primary uppercase">
                 The story
               </p>
             </div>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground">
-              Built from experience, shaped around your needs.
-            </h2>
           </div>
           <div className="space-y-4 text-base leading-7 text-muted">
             {ABOUT_PAGE_DATA.story.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+          </div>
+        </div>
+      </section> */}
+
+      <section className="border-y border-border bg-surface-muted">
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex p-2 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <IconComp name="about" className="h-10 w-10" />
+              </span>
+              <p className="text-sm font-bold tracking-[.16em] text-primary uppercase">
+                Our Team
+              </p>
+            </div>
+            <div className="py-5 grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 gap-3 ">
+              {ABOUT_PAGE_DATA.team.map((e) => (
+                <div>
+                  {/* Image  */}
+                  <div className=" overflow-hidden rounded-2xl h-[400px]">
+                    <Image
+                      src={e.photo}
+                      height={500}
+                      width={350}
+                      alt=""
+                      className="relative aspect-auto h-full w-full content-fill"
+                    ></Image>
+                  </div>
+                  <div className="flex flex-col mt-3 ml-4">
+                    <span className=" text-sm">{e.position}</span>
+                    <span className="font-medium">
+                      {e.firstName} {e.lastName}
+                    </span>
+                  </div>
+                </div>
+              ))}
+              <a href={`mailto:${brand.contactEmail}`}>
+                {/* Image  */}
+                <div className="h-[400px] rounded-2xl max-w-[500px] min-w-[350px] bg-primary/30 flex items-center justify-center">
+                  <IoMailSharp className="text-7xl"></IoMailSharp>
+                </div>
+                <div className="flex flex-col mt-3 ml-4">
+                  <span className=" text-sm">Wanted to join us ??</span>
+                  <span className="font-medium flex items-center gap-1">
+                    Mail Us <IoMail />
+                  </span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -121,9 +153,7 @@ export function AboutPageView() {
             <h2 className="mt-3 text-2xl font-semibold text-foreground sm:text-3xl">
               Here to help your business move forward.
             </h2>
-            <p className="mt-3 text-sm leading-6 text-muted">
-              {brand.address}
-            </p>
+            <p className="mt-3 text-sm leading-6 text-muted">{brand.address}</p>
           </div>
         </div>
       </section>

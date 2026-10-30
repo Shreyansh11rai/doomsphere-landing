@@ -1,13 +1,34 @@
+export type TeamMember = {
+  position: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  alt: string;
+};
+
 export interface AboutPageData {
-  founderImage: string | null;
-  founderImageAlt: string;
+  team: TeamMember[];
   story: readonly string[];
   values: readonly { title: string; description: string }[];
 }
 
 export const ABOUT_PAGE_DATA: AboutPageData = {
-  founderImage: null,
-  founderImageAlt: "DoomSphere founder",
+  team: [
+    {
+      position: "Founder & Full Stack Developer",
+      firstName: "Shreyansh",
+      lastName: "Rai",
+      photo: "/shreyansh-founder.jpeg",
+      alt: "Shreyansh founder & full stack developer photo",
+    },
+    {
+      position: "UI/UX Designer & Frontend Developer",
+      firstName: "Dhruv",
+      lastName: "Gandas",
+      photo: "/dhruv.png",
+      alt: "dhruv gandas UI/UX designer & frontend developer",
+    },
+  ],
   story: [
     "I spent four years working as a developer, growing into senior roles and helping teams turn ideas into working digital products. Along the way, I saw how much clearer and more welcoming digital tools could make a business feel to its customers.",
     "That experience inspired me to start DoomSphere: to help new and growing businesses build a thoughtful digital presence, serve customers more smoothly, and make everyday work a little easier.",
