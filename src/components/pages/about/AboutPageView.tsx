@@ -3,7 +3,6 @@ import { IconComp } from "@/components/layout/widgets/IconComp";
 import { Button } from "@/components/shared/Button";
 import { ABOUT_PAGE_DATA } from "@/data/about_page_data";
 import { brand } from "@/config/brand.config";
-import { BsMailbox } from "react-icons/bs";
 import { IoMail, IoMailSharp } from "react-icons/io5";
 
 export function AboutPageView() {

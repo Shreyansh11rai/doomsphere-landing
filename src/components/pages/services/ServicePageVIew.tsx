@@ -41,7 +41,9 @@ export function ServicePageView({ service }: ServicePageViewProps) {
     (testimonial) => !testimonial.placeholder,
   );
   const testimonials =
-    confirmedTestimonials.length > 0 ? confirmedTestimonials : HOME_TESTIMONIALS;
+    confirmedTestimonials.length > 0
+      ? confirmedTestimonials
+      : HOME_TESTIMONIALS;
 
   // async function handlePricingSubmit(event: React.FormEvent<HTMLFormElement>) {
   //   event.preventDefault();
@@ -112,12 +114,12 @@ export function ServicePageView({ service }: ServicePageViewProps) {
               {service.eyebrow}
             </p>
           </div>
-            <p className="mt-5 text-sm font-semibold tracking-wide text-subtle uppercase">
-              What this service is
-            </p>
-            <h1 className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-              {service.name}
-            </h1>
+          <p className="mt-5 text-sm font-semibold tracking-wide text-subtle uppercase">
+            What this service is
+          </p>
+          <h1 className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            {service.name}
+          </h1>
           <p className="mt-4 text-lg font-medium text-foreground">
             {service.valueProposition}
           </p>
@@ -186,7 +188,10 @@ export function ServicePageView({ service }: ServicePageViewProps) {
       <section className="border-y border-border bg-surface-muted">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 sm:py-16 lg:grid-cols-2 lg:px-8">
           <div>
-            <ServiceSectionHeading icon="target" title="Outcomes and benefits" />
+            <ServiceSectionHeading
+              icon="target"
+              title="Outcomes and benefits"
+            />
             <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               Make the next step easier for your customers and your team.
             </h3>
@@ -333,10 +338,7 @@ export function ServicePageView({ service }: ServicePageViewProps) {
 
             <article className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6">
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
-              <ServiceSectionHeading
-                icon="compass"
-                title="Delivery clarity"
-              />
+              <ServiceSectionHeading icon="compass" title="Delivery clarity" />
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {service.timeAndMoneyBenefits.map((benefit) => (
                   <div
@@ -368,11 +370,11 @@ export function ServicePageView({ service }: ServicePageViewProps) {
                 key={item.name}
                 className="rounded-xl border border-border bg-surface p-6"
               >
-                {"businessType" in item && (
+                {/* {"businessType" in item && (
                   <p className="text-xs font-semibold tracking-[.14em] text-subtle uppercase">
                     {item.businessType}
                   </p>
-                )}
+                )} */}
                 {"rating" in item && item.rating && (
                   <p className="mt-3 text-sm font-semibold text-warning">
                     {item.rating}/5 stars
