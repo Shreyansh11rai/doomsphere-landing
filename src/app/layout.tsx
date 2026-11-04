@@ -67,6 +67,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta
+          name="ahrefs-site-verification"
+          content="f736c1143ebd5b44c8ceaa1327698f714600daa7c6c3769ea0622e2c46ba4db5"
+        ></meta>
+      </head>
       <body
         className={`max-h-screen relative bg-canvas font-sans text-foreground ${PoppinsFont.className}`}
       >

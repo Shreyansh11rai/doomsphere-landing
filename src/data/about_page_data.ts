@@ -15,11 +15,18 @@ export interface AboutPageData {
 export const ABOUT_PAGE_DATA: AboutPageData = {
   team: [
     {
-      position: "Founder & Full Stack Developer",
+      position: "Full Stack Developer",
       firstName: "Shreyansh",
       lastName: "Rai",
       photo: "/shreyansh-founder.jpeg",
       alt: "Shreyansh founder & full stack developer photo",
+    },
+    {
+      position: "Content and Social Media Manager",
+      firstName: "Saadiq",
+      lastName: "Akhtar",
+      photo: "/sadiq.jpeg",
+      alt: "sadiq akhtar content manager image",
     },
     {
       position: "UI/UX Designer & Frontend Developer",

@@ -75,22 +75,21 @@ export function AboutPageView() {
                 Our Team
               </p>
             </div>
-            <div className="py-5 grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 gap-3 ">
+            <div className="py-5 grid grid-cols-1 gap-10 md:gap-7 sm:grid-cols-2 md:grid-cols-3 gap-3 ">
               {ABOUT_PAGE_DATA.team.map((e) => (
-                <div>
+                <div key={e.firstName}>
                   {/* Image  */}
-                  <div className=" overflow-hidden rounded-2xl h-[400px]">
+                  <div className="overflow-hidden relative rounded-2xl h-[500px] sm:h-[500px] md:h-[400px] lg:h-[500px]">
                     <Image
                       src={e.photo}
-                      height={500}
-                      width={350}
-                      alt=""
-                      className="relative aspect-auto h-full w-full content-fill"
+                      fill
+                      alt={e.alt}
+                      className="object-cover h-full w-full"
                     ></Image>
                   </div>
                   <div className="flex flex-col mt-3 ml-4">
-                    <span className=" text-sm">{e.position}</span>
-                    <span className="font-medium">
+                    <span className=" text-md">{e.position}</span>
+                    <span className="font-medium text-lg">
                       {e.firstName} {e.lastName}
                     </span>
                   </div>
@@ -98,7 +97,7 @@ export function AboutPageView() {
               ))}
               <a href={`mailto:${brand.contactEmail}`}>
                 {/* Image  */}
-                <div className="h-[400px] rounded-2xl max-w-[500px] min-w-[350px] bg-primary/30 flex items-center justify-center">
+                <div className="h-full rounded-2xl bg-primary/30 flex items-center justify-center">
                   <IoMailSharp className="text-7xl"></IoMailSharp>
                 </div>
                 <div className="flex flex-col mt-3 ml-4">
