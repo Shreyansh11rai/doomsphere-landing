@@ -16,10 +16,12 @@
   --theme-warning: #ba7000;
   --theme-focus: #2463eb;
   --theme-shadow: 219 229 240;
+  --react-international-phone-height: 20px;
 }
 
 .dark {
   --theme-canvas: #000000;
+  --react-international-phone-height: 20px;
   --theme-surface: #1a1a1a;
   --theme-surface-muted: #272727;
   --theme-foreground: #eeeeee;

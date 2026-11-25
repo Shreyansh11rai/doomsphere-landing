@@ -9,6 +9,7 @@ import { logger } from "@/utils/logger";
 import type { UseMutationResult } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
+import { PhoneInput } from "react-international-phone";
 
 const initialValues: EnquiryInput = {
   name: "",
@@ -86,7 +87,7 @@ export function EnquiryForm({
     });
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     logger.trace("at submit");
     const result = enquirySchema.safeParse(values);
@@ -136,17 +137,13 @@ export function EnquiryForm({
           />
           <FieldError message={errors.email} />
         </label>
-        <label className="text-sm text-muted">
-          <span className="mb-2 block font-semibold text-foreground">
-            Phone
-          </span>
-          <input
-            type="tel"
+        <label className="text-sm text-muted relative">
+          <span className="block font-semibold text-foreground">Phone</span>
+          <PhoneInput
+            defaultCountry="in"
             value={values.phone}
-            onChange={(event) => updateField("phone", event.target.value)}
-            onBlur={() => validateField("phone")}
-            className="ui-input"
-            required
+            inputClassName="ui-input relative -top-3"
+            onChange={(event) => updateField("phone", event)}
           />
           <FieldError message={errors.phone} />
         </label>
